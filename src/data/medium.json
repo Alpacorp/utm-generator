@@ -1,0 +1,28 @@
+{
+  "mediumData": [
+    {
+      "id": 1,
+      "name": "email"
+    },
+    {
+      "id": 2,
+      "name": "phone"
+    },
+    {
+      "id": 3,
+      "name": "sms"
+    },
+    {
+      "id": 4,
+      "name": "push"
+    },
+    {
+      "id": 5,
+      "name": "web"
+    },
+    {
+      "id": 6,
+      "name": "banner_ppal"
+    }
+  ]
+}
