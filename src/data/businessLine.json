@@ -1,0 +1,14 @@
+{
+  "businessLineData": [
+    {
+      "id": 1,
+      "name": "Prestamo Digital",
+      "shortName": "pd"
+    },
+    {
+      "id": 2,
+      "name": "Cuentamiga Digital",
+      "shortName": "cad"
+    }
+  ]
+}

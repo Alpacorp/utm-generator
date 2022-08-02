@@ -1,0 +1,19 @@
+{
+  "channelTypeData": [
+    {
+      "id": 1,
+      "name": "medios_directos",
+      "shortName": "md"
+    },
+    {
+      "id": 2,
+      "name": "medios_no_pagos",
+      "shortName": "mnp"
+    },
+    {
+      "id": 3,
+      "name": "medios_propios",
+      "shortName": "md"
+    }
+  ]
+}

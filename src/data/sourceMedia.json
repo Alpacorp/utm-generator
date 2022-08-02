@@ -1,0 +1,109 @@
+{
+  "sourceMediaData": [
+    {
+      "id": 1,
+      "name": "bing",
+      "idChannelType": 2
+    },
+    {
+      "id": 2,
+      "name": "blogsubancoamigo",
+      "idChannelType": 2
+    },
+    {
+      "id": 3,
+      "name": "comdata",
+      "idChannelType": 1
+    },
+    {
+      "id": 4,
+      "name": "email",
+      "idChannelType": 3
+    },
+    {
+      "id": 5,
+      "name": "facebook",
+      "idChannelType": 2
+    },
+    {
+      "id": 6,
+      "name": "gmb",
+      "idChannelType": 2
+    },
+    {
+      "id": 7,
+      "name": "whatsapp",
+      "idChannelType": 1
+    },
+    {
+      "id": 8,
+      "name": "yahoo",
+      "idChannelType": 2
+    },
+    {
+      "id": 9,
+      "name": "instagram",
+      "idChannelType": 2
+    },
+    {
+      "id": 10,
+      "name": "linkedin",
+      "idChannelType": 2
+    },
+    {
+      "id": 11,
+      "name": "twitter",
+      "idChannelType": 2
+    },
+    {
+      "id": 12,
+      "name": "referidos",
+      "idChannelType": 2
+    },
+    {
+      "id": 13,
+      "name": "google",
+      "idChannelType": 2
+    },
+    {
+      "id": 14,
+      "name": "portalwebcajasocial",
+      "idChannelType": 3
+    },
+    {
+      "id": 15,
+      "name": "blogsubancoamigo",
+      "idChannelType": 3
+    },
+    {
+      "id": 16,
+      "name": "mipagoamigo",
+      "idChannelType": 3
+    },
+    {
+      "id": 17,
+      "name": "impresos",
+      "idChannelType": 3
+    },
+    {
+      "id": 18,
+      "name": "startv",
+      "idChannelType": 3
+    },
+    {
+      "id": 19,
+      "name": "intranet",
+      "idChannelType": 3
+    },
+    {
+      "id": 20,
+      "name": "revista",
+      "idChannelType": 3
+    },
+    {
+      "id": 21,
+      "name": "noticiero",
+      "idChannelType": 3
+    }
+  ]
+}

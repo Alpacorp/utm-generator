@@ -1,0 +1,14 @@
+{
+  "typeAdData": [
+    {
+      "id": 1,
+      "name": "Always On",
+      "shortName": "aon"
+    },
+    {
+      "id": 2,
+      "name": "Special",
+      "shortName": "sp"
+    }
+  ]
+}
