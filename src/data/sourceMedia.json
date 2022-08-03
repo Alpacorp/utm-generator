@@ -2,108 +2,163 @@
   "sourceMediaData": [
     {
       "id": 1,
-      "name": "bing",
-      "idChannelType": 2
+      "name": "portalwebcajasocial",
+      "idChannelType": 1
     },
     {
       "id": 2,
       "name": "blogsubancoamigo",
-      "idChannelType": 2
+      "idChannelType": 1
     },
     {
       "id": 3,
-      "name": "comdata",
+      "name": "mipagoamigo",
       "idChannelType": 1
     },
     {
       "id": 4,
-      "name": "email",
-      "idChannelType": 3
+      "name": "impresos",
+      "idChannelType": 1
     },
     {
       "id": 5,
-      "name": "facebook",
-      "idChannelType": 2
+      "name": "startv",
+      "idChannelType": 1
     },
     {
       "id": 6,
-      "name": "gmb",
-      "idChannelType": 2
+      "name": "email",
+      "idChannelType": 1
     },
     {
       "id": 7,
-      "name": "whatsapp",
+      "name": "intranet",
       "idChannelType": 1
     },
     {
       "id": 8,
-      "name": "yahoo",
-      "idChannelType": 2
+      "name": "revista",
+      "idChannelType": 1
     },
     {
       "id": 9,
-      "name": "instagram",
-      "idChannelType": 2
+      "name": "noticiero",
+      "idChannelType": 1
     },
     {
       "id": 10,
-      "name": "linkedin",
+      "name": "bing",
       "idChannelType": 2
     },
     {
       "id": 11,
-      "name": "twitter",
-      "idChannelType": 2
-    },
-    {
-      "id": 12,
-      "name": "referidos",
-      "idChannelType": 2
-    },
-    {
-      "id": 13,
       "name": "google",
       "idChannelType": 2
     },
     {
+      "id": 12,
+      "name": "gmb",
+      "idChannelType": 2
+    },
+    {
+      "id": 13,
+      "name": "yahoo",
+      "idChannelType": 2
+    },
+    {
       "id": 14,
-      "name": "portalwebcajasocial",
-      "idChannelType": 3
+      "name": "facebook",
+      "idChannelType": 2
     },
     {
       "id": 15,
-      "name": "blogsubancoamigo",
-      "idChannelType": 3
+      "name": "instagram",
+      "idChannelType": 2
     },
     {
       "id": 16,
-      "name": "mipagoamigo",
-      "idChannelType": 3
+      "name": "linkedin",
+      "idChannelType": 2
     },
     {
       "id": 17,
-      "name": "impresos",
-      "idChannelType": 3
+      "name": "twitter",
+      "idChannelType": 2
     },
     {
       "id": 18,
-      "name": "startv",
-      "idChannelType": 3
+      "name": "whatsapp",
+      "idChannelType": 2
     },
     {
       "id": 19,
-      "name": "intranet",
-      "idChannelType": 3
+      "name": "referidos",
+      "idChannelType": 2
     },
     {
       "id": 20,
-      "name": "revista",
+      "name": "google",
       "idChannelType": 3
     },
     {
       "id": 21,
-      "name": "noticiero",
+      "name": "meta",
       "idChannelType": 3
+    },
+    {
+      "id": 22,
+      "name": "fluvip",
+      "idChannelType": 3
+    },
+    {
+      "id": 23,
+      "name": "linkedin",
+      "idChannelType": 3
+    },
+    {
+      "id": 24,
+      "name": "taptap",
+      "idChannelType": 3
+    },
+    {
+      "id": 25,
+      "name": "acuity",
+      "idChannelType": 3
+    },
+    {
+      "id": 26,
+      "name": "adpromedia",
+      "idChannelType": 3
+    },
+    {
+      "id": 27,
+      "name": "cadreon",
+      "idChannelType": 3
+    },
+    {
+      "id": 28,
+      "name": "doubleclick",
+      "idChannelType": 3
+    },
+    {
+      "id": 29,
+      "name": "bing",
+      "idChannelType": 3
+    },
+    {
+      "id": 30,
+      "name": "yahoo",
+      "idChannelType": 3
+    },
+    {
+      "id": 31,
+      "name": "peoplemedia",
+      "idChannelType": 3
+    },
+    {
+      "id": 32,
+      "name": "comdata",
+      "idChannelType": 4
     }
   ]
 }

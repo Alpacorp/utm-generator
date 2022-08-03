@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "../componentes/Home";
+import { MenuTab } from "../componentes/MenuTab";
 import Layout from "./Layout";
 
 const AppRouter = () => {
@@ -7,7 +7,7 @@ const AppRouter = () => {
     <>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<MenuTab />} />
         </Routes>
       </Layout>
     </>

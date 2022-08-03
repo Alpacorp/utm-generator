@@ -14,6 +14,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { useForm } from "../hooks/useForm";
 import { transformText } from "../utils/transformText";
 import { useState } from "react";
+import "./Home.css";
 
 const { businessLineData } = Business;
 const { channelTypeData } = Channel;
@@ -22,7 +23,7 @@ const { sourceMediaData } = SourceMedia;
 const { strategyData } = Strategy;
 const { mediumData } = Medium;
 
-const Home = () => {
+const Utms = () => {
   const [finalUrl, setFinalUrl] = useState("");
 
   const [formValues, handleInputChange, reset] = useForm({
@@ -85,9 +86,11 @@ const Home = () => {
             error={false}
             required
             type="url"
+            style={{ margin: "0 10px" }}
             helperText="Coloca la url de la página destino"
           />
           <TextField
+            style={{ margin: "0 10px" }}
             id="businessLine"
             name="businessLine"
             label="Producto"
@@ -99,6 +102,7 @@ const Home = () => {
             helperText="Selecciona un producto"
             required
           >
+            <MenuItem value="">Selecciona</MenuItem>
             {businessLineData.map((value: any, index: number) => (
               <MenuItem key={value.id} value={value.shortName}>
                 {value.name}
@@ -106,6 +110,7 @@ const Home = () => {
             ))}
           </TextField>
           <TextField
+            style={{ margin: "0 10px" }}
             id="typeAd"
             name="typeAd"
             label="Tipo de inversión"
@@ -117,6 +122,7 @@ const Home = () => {
             helperText="Selecciona el tipo de inversión"
             required
           >
+            <MenuItem value="">Selecciona</MenuItem>
             {typeAdData.map((value: any, index: number) => (
               <MenuItem key={value.id} value={value.shortName}>
                 {value.name}
@@ -124,6 +130,7 @@ const Home = () => {
             ))}
           </TextField>
           <TextField
+            style={{ margin: "0 10px" }}
             id="strategy"
             name="strategy"
             label="Estrategia"
@@ -135,6 +142,7 @@ const Home = () => {
             helperText="Selecciona la estrategia"
             required
           >
+            <MenuItem value="">Selecciona</MenuItem>
             {strategyData.map((value: any, index: number) => (
               <MenuItem key={value.id} value={value.shortName}>
                 {value.name}
@@ -142,6 +150,7 @@ const Home = () => {
             ))}
           </TextField>
           <TextField
+            style={{ margin: "0 10px" }}
             id="channelType"
             name="channelType"
             label="Tipo de canal"
@@ -154,6 +163,7 @@ const Home = () => {
             required
             defaultValue=""
           >
+            <MenuItem value="">Selecciona</MenuItem>
             {channelTypeData.map((value: any, index: number) => (
               <MenuItem key={value.id} value={value.id}>
                 {value.name}
@@ -161,6 +171,7 @@ const Home = () => {
             ))}
           </TextField>
           <TextField
+            style={{ margin: "0 10px" }}
             id="sourceMedia"
             name="sourceMedia"
             label="Selecciona"
@@ -174,6 +185,7 @@ const Home = () => {
             defaultValue=""
             disabled={channelType === "" ? true : false}
           >
+            <MenuItem value="">Selecciona</MenuItem>
             {sourceMediaFiltered.map((value: any, index: number) => (
               <MenuItem key={value.id} value={value.name}>
                 {value.name}
@@ -181,6 +193,7 @@ const Home = () => {
             ))}
           </TextField>
           <TextField
+            style={{ margin: "0 10px" }}
             id="medium"
             name="medium"
             label="Medio"
@@ -200,6 +213,7 @@ const Home = () => {
             ))}
           </TextField>
           <TextField
+            style={{ margin: "0 10px" }}
             id="campain"
             name="campain"
             label="Nombre de la campaña"
@@ -213,6 +227,7 @@ const Home = () => {
             helperText="Digita el nombre de la campaña"
           />
           <TextField
+            style={{ margin: "0 10px" }}
             id="content"
             name="content"
             label="Contenido"
@@ -230,32 +245,34 @@ const Home = () => {
             type="submit"
             color="primary"
           >
-            Send
+            Generar url
           </Button>
         </form>
 
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Paper>
-              <Typography variant="h5" component="h3">
-                Url Final
-              </Typography>
-              <CopyToClipboard text={finalUrl}>
-                <p
-                  onClick={() =>
-                    toast("url copiada exitosamente", {
-                      position: "bottom-right",
-                    })
-                  }
-                  style={{ cursor: "pointer" }}
-                  className="clickable"
-                >
-                  {finalUrl}
-                </p>
-              </CopyToClipboard>
-            </Paper>
+        {finalUrl !== "" && (
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper>
+                <Typography variant="h5" component="h3">
+                  Url Final
+                </Typography>
+                <CopyToClipboard text={finalUrl}>
+                  <p
+                    onClick={() =>
+                      toast("url copiada exitosamente", {
+                        position: "bottom-right",
+                      })
+                    }
+                    style={{ cursor: "pointer" }}
+                    className="clickable"
+                  >
+                    {finalUrl}
+                  </p>
+                </CopyToClipboard>
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
         <Toaster
           toastOptions={{
             // Define default options
@@ -281,4 +298,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Utms;

@@ -2,8 +2,8 @@
   "channelTypeData": [
     {
       "id": 1,
-      "name": "medios_directos",
-      "shortName": "md"
+      "name": "medios_propios",
+      "shortName": "mp"
     },
     {
       "id": 2,
@@ -12,8 +12,13 @@
     },
     {
       "id": 3,
-      "name": "medios_propios",
+      "name": "medios_pagos",
       "shortName": "mp"
+    },
+    {
+      "id": 4,
+      "name": "medios_directos",
+      "shortName": "md"
     }
   ]
 }
