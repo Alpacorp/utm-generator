@@ -1,0 +1,24 @@
+{
+  "modelBuyData": [
+    {
+      "id": 1,
+      "name": "costo por mil impresiones (cpm)",
+      "shortName": "cpm"
+    },
+    {
+      "id": 2,
+      "name": "costo por click (cpc)",
+      "shortName": "cpc"
+    },
+    {
+      "id": 3,
+      "name": "costo por adquisición (cpa)",
+      "shortName": "cpa"
+    },
+    {
+      "id": 4,
+      "name": "costo por lead (cpl)",
+      "shortName": "cpl"
+    }
+  ]
+}

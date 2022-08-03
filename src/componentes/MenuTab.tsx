@@ -1,9 +1,9 @@
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import Utms from "./Home";
+import Utms from "./Utms";
+import CampainName from "./CampainName";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -62,7 +62,7 @@ export const MenuTab = () => {
         <Utms />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <CampainName />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

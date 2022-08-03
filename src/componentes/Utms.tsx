@@ -1,12 +1,12 @@
 import MenuItem from "@mui/material/MenuItem";
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 
-import Business from "../data/businessLine.json";
-import Channel from "../data/channelType.json";
-import TypeAd from "../data/typeAd.json";
-import SourceMedia from "../data/sourceMedia.json";
-import Strategy from "../data/strategy.json";
-import Medium from "../data/medium.json";
+import Business from "../data/utm/businessLineUtm.json";
+import Channel from "../data/utm/channelTypeUtm.json";
+import TypeAd from "../data/utm/typeAdUtm.json";
+import SourceMedia from "../data/utm/sourceMediaUtm.json";
+import Strategy from "../data/utm/strategyUtm.json";
+import Medium from "../data/utm/mediumUtm.json";
 
 import CopyToClipboard from "react-copy-to-clipboard";
 import { Toaster, toast } from "react-hot-toast";
@@ -14,14 +14,14 @@ import { Toaster, toast } from "react-hot-toast";
 import { useForm } from "../hooks/useForm";
 import { transformText } from "../utils/transformText";
 import { useState } from "react";
-import "./Home.css";
+import "./Utms.css";
 
-const { businessLineData } = Business;
-const { channelTypeData } = Channel;
-const { typeAdData } = TypeAd;
-const { sourceMediaData } = SourceMedia;
-const { strategyData } = Strategy;
-const { mediumData } = Medium;
+const { businessLineUtmData } = Business;
+const { channelTypeUtmData } = Channel;
+const { typeAdUtmData } = TypeAd;
+const { sourceMediaUtmData } = SourceMedia;
+const { strategyUtmData } = Strategy;
+const { mediumUtmData } = Medium;
 
 const Utms = () => {
   const [finalUrl, setFinalUrl] = useState("");
@@ -50,7 +50,7 @@ const Utms = () => {
     content,
   } = formValues;
 
-  const sourceMediaFiltered = sourceMediaData.filter(
+  const sourceMediaFiltered = sourceMediaUtmData.filter(
     (item) => item.idChannelType === channelType
   );
 
@@ -103,7 +103,7 @@ const Utms = () => {
             required
           >
             <MenuItem value="">Selecciona</MenuItem>
-            {businessLineData.map((value: any, index: number) => (
+            {businessLineUtmData.map((value: any, index: number) => (
               <MenuItem key={value.id} value={value.shortName}>
                 {value.name}
               </MenuItem>
@@ -123,7 +123,7 @@ const Utms = () => {
             required
           >
             <MenuItem value="">Selecciona</MenuItem>
-            {typeAdData.map((value: any, index: number) => (
+            {typeAdUtmData.map((value: any, index: number) => (
               <MenuItem key={value.id} value={value.shortName}>
                 {value.name}
               </MenuItem>
@@ -143,7 +143,7 @@ const Utms = () => {
             required
           >
             <MenuItem value="">Selecciona</MenuItem>
-            {strategyData.map((value: any, index: number) => (
+            {strategyUtmData.map((value: any, index: number) => (
               <MenuItem key={value.id} value={value.shortName}>
                 {value.name}
               </MenuItem>
@@ -164,7 +164,7 @@ const Utms = () => {
             defaultValue=""
           >
             <MenuItem value="">Selecciona</MenuItem>
-            {channelTypeData.map((value: any, index: number) => (
+            {channelTypeUtmData.map((value: any, index: number) => (
               <MenuItem key={value.id} value={value.id}>
                 {value.name}
               </MenuItem>
@@ -206,7 +206,7 @@ const Utms = () => {
             required
           >
             <MenuItem value="">Selecciona</MenuItem>
-            {mediumData.map((value: any, index: number) => (
+            {mediumUtmData.map((value: any, index: number) => (
               <MenuItem key={value.id} value={value.name}>
                 {value.name}
               </MenuItem>
@@ -250,11 +250,11 @@ const Utms = () => {
         </form>
 
         {finalUrl !== "" && (
-          <Grid container spacing={3}>
+          <Grid container spacing={3} style={{ margin: "20px 0" }}>
             <Grid item xs={12}>
               <Paper>
                 <Typography variant="h5" component="h3">
-                  Url Final
+                  Haz click o toca la url para copiarla
                 </Typography>
                 <CopyToClipboard text={finalUrl}>
                   <p
