@@ -1,5 +1,12 @@
 import MenuItem from "@mui/material/MenuItem";
-import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  Paper,
+  TextareaAutosize,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 import Business from "../data/utm/businessLineUtm.json";
 import Channel from "../data/utm/channelTypeUtm.json";
@@ -68,8 +75,8 @@ const Utms = () => {
     createCampainName();
     const utmSourceName = `${sourceMedia}`;
     const utmMediumName = `${medium}`;
-    const utmTermName = `${content}`;
-    const urlConcatenate = `${url}?utm_source=${utmSourceName}&utm_medium=${utmMediumName}&utm_campaign=${utmCampainName}&utm_term=${utmTermName}`;
+    const utmTermName = content ? `&utm_term=${content}` : "";
+    const urlConcatenate = `${url}?utm_source=${utmSourceName}&utm_medium=${utmMediumName}&utm_campaign=${utmCampainName}${utmTermName}`;
     console.log("urlConcatenate", urlConcatenate);
     setFinalUrl(urlConcatenate);
   };
@@ -83,203 +90,223 @@ const Utms = () => {
 
   return (
     <div>
-      <Grid style={{ margin: "20px" }}>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            id="url"
-            name="url"
-            label="url"
-            value={url}
-            onChange={handleInputChange}
-            variant="outlined"
-            size="small"
-            error={false}
-            required
-            type="url"
-            style={{ margin: "20px", width: "20%" }}
-            helperText="Coloca la url de la página destino"
-          />
-          <TextField
-            style={{ margin: "20px", width: "20%" }}
-            id="businessLine"
-            name="businessLine"
-            label="Producto"
-            variant="outlined"
-            select
-            size="small"
-            value={businessLine}
-            onChange={handleInputChange}
-            helperText="Selecciona un producto"
-            required
-          >
-            <MenuItem value="">Selecciona</MenuItem>
-            {businessLineUtmData.map((value: any, index: number) => (
-              <MenuItem key={value.id} value={value.shortName}>
-                {value.name}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            style={{ margin: "20px", width: "20%" }}
-            id="typeAd"
-            name="typeAd"
-            label="Tipo de inversión"
-            variant="outlined"
-            select
-            size="small"
-            value={typeAd}
-            onChange={handleInputChange}
-            helperText="Selecciona el tipo de inversión"
-            required
-          >
-            <MenuItem value="">Selecciona</MenuItem>
-            {typeAdUtmData.map((value: any, index: number) => (
-              <MenuItem key={value.id} value={value.shortName}>
-                {value.name}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            style={{ margin: "20px", width: "20%" }}
-            id="strategy"
-            name="strategy"
-            label="Estrategia"
-            variant="outlined"
-            select
-            size="small"
-            value={strategy}
-            onChange={handleInputChange}
-            helperText="Selecciona la estrategia"
-            required
-          >
-            <MenuItem value="">Selecciona</MenuItem>
-            {strategyUtmData.map((value: any, index: number) => (
-              <MenuItem key={value.id} value={value.shortName}>
-                {value.name}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            style={{ margin: "20px", width: "20%" }}
-            id="channelType"
-            name="channelType"
-            label="Tipo de canal"
-            variant="outlined"
-            select
-            size="small"
-            value={channelType}
-            onChange={handleInputChange}
-            helperText="Selecciona el tipo de canal"
-            required
-            defaultValue=""
-          >
-            <MenuItem value="">Selecciona</MenuItem>
-            {channelTypeUtmData.map((value: any, index: number) => (
-              <MenuItem key={value.id} value={value.id}>
-                {value.name}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            style={{ margin: "20px", width: "20%" }}
-            id="sourceMedia"
-            name="sourceMedia"
-            label="Selecciona"
-            variant="outlined"
-            select
-            size="small"
-            value={sourceMedia === -1 ? "" : sourceMedia}
-            onChange={handleInputChange}
-            helperText="Selecciona la fuente de publicación"
-            required
-            defaultValue=""
-            disabled={channelType === "" ? true : false}
-          >
-            <MenuItem value="">Selecciona</MenuItem>
-            {sourceMediaFiltered.map((value: any, index: number) => (
-              <MenuItem key={value.id} value={value.name}>
-                {value.name}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            style={{ margin: "20px", width: "20%" }}
-            id="medium"
-            name="medium"
-            label="Medio"
-            variant="outlined"
-            select
-            size="small"
-            value={medium}
-            onChange={handleInputChange}
-            helperText="Selecciona el medio"
-            required
-          >
-            <MenuItem value="">Selecciona</MenuItem>
-            {mediumUtmData.map((value: any, index: number) => (
-              <MenuItem key={value.id} value={value.name}>
-                {value.name}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            style={{ margin: "20px", width: "20%" }}
-            id="campain"
-            name="campain"
-            label="Campaña"
-            value={utmCampainName}
-            onChange={handleInputChange}
-            variant="outlined"
-            size="small"
-            error={false}
-            required
-            disabled
-            type="text"
-            helperText="producto_inversion_estrategia"
-          />
-          <TextField
-            style={{ margin: "20px", width: "20%" }}
-            id="content"
-            name="content"
-            label="Contenido"
-            value={transformText(content)}
-            onChange={handleInputChange}
-            variant="outlined"
-            size="small"
-            error={false}
-            type="text"
-            helperText="Contenido adicional"
-          />
-          <Button
-            variant="contained"
-            size="large"
-            type="submit"
-            color="primary"
-            style={{ display: "block", margin: "20px auto" }}
-          >
-            Generar url
-          </Button>
-        </form>
+      <Grid style={{ margin: "20px 60px" }}>
+        <Grid item lg={4} md={4} xs={12}>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              id="url"
+              autoFocus
+              name="url"
+              label="url"
+              value={url}
+              onChange={handleInputChange}
+              variant="outlined"
+              size="small"
+              error={false}
+              required
+              type="url"
+              style={{ width: "100%" }}
+              helperText="Coloca la url de la página destino"
+            />
+            <TextField
+              style={{ width: "100%" }}
+              id="businessLine"
+              name="businessLine"
+              label="Producto"
+              variant="outlined"
+              select
+              size="small"
+              value={businessLine}
+              onChange={handleInputChange}
+              helperText="Selecciona un producto"
+              required
+            >
+              <MenuItem value="">Selecciona</MenuItem>
+              {businessLineUtmData.map((value: any, index: number) => (
+                <MenuItem key={value.id} value={value.shortName}>
+                  {value.name}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              style={{ width: "100%" }}
+              id="typeAd"
+              name="typeAd"
+              label="Tipo de inversión"
+              variant="outlined"
+              select
+              size="small"
+              value={typeAd}
+              onChange={handleInputChange}
+              helperText="Selecciona el tipo de inversión"
+              required
+            >
+              <MenuItem value="">Selecciona</MenuItem>
+              {typeAdUtmData.map((value: any, index: number) => (
+                <MenuItem key={value.id} value={value.shortName}>
+                  {value.name}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              style={{ width: "100%" }}
+              id="strategy"
+              name="strategy"
+              label="Estrategia"
+              variant="outlined"
+              select
+              size="small"
+              value={strategy}
+              onChange={handleInputChange}
+              helperText="Selecciona la estrategia"
+              required
+            >
+              <MenuItem value="">Selecciona</MenuItem>
+              {strategyUtmData.map((value: any, index: number) => (
+                <MenuItem key={value.id} value={value.shortName}>
+                  {value.name}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              style={{ width: "100%" }}
+              id="channelType"
+              name="channelType"
+              label="Tipo de canal"
+              variant="outlined"
+              select
+              size="small"
+              value={channelType}
+              onChange={handleInputChange}
+              helperText="Selecciona el tipo de canal"
+              required
+              defaultValue=""
+            >
+              <MenuItem value="">Selecciona</MenuItem>
+              {channelTypeUtmData.map((value: any, index: number) => (
+                <MenuItem key={value.id} value={value.id}>
+                  {value.name}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              style={{ width: "100%" }}
+              id="sourceMedia"
+              name="sourceMedia"
+              label="Selecciona"
+              variant="outlined"
+              select
+              size="small"
+              value={sourceMedia === -1 ? "" : sourceMedia}
+              onChange={handleInputChange}
+              helperText="Selecciona la fuente de publicación"
+              required
+              defaultValue=""
+              disabled={channelType === "" ? true : false}
+            >
+              <MenuItem value="">Selecciona</MenuItem>
+              {sourceMediaFiltered.map((value: any, index: number) => (
+                <MenuItem key={value.id} value={value.name}>
+                  {value.name}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              style={{ width: "100%" }}
+              id="medium"
+              name="medium"
+              label="Medio"
+              variant="outlined"
+              select
+              size="small"
+              value={medium}
+              onChange={handleInputChange}
+              helperText="Selecciona el medio"
+              required
+            >
+              <MenuItem value="">Selecciona</MenuItem>
+              {mediumUtmData.map((value: any, index: number) => (
+                <MenuItem key={value.id} value={value.name}>
+                  {value.name}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              style={{ width: "100%" }}
+              id="campain"
+              name="campain"
+              label="Campaña"
+              value={utmCampainName}
+              onChange={handleInputChange}
+              variant="outlined"
+              size="small"
+              error={false}
+              required
+              disabled
+              type="text"
+              helperText="producto_inversion_estrategia"
+            />
+            <TextField
+              style={{ width: "100%" }}
+              id="content"
+              name="content"
+              label="Contenido"
+              value={transformText(content)}
+              onChange={handleInputChange}
+              variant="outlined"
+              size="small"
+              error={false}
+              type="text"
+              helperText="Contenido adicional"
+            />
+            <Button
+              variant="contained"
+              size="large"
+              type="submit"
+              color="primary"
+              style={{ display: "block", margin: "20px auto" }}
+              disabled={
+                !url ||
+                !businessLine ||
+                !typeAd ||
+                !strategy ||
+                !channelType ||
+                !sourceMedia ||
+                !medium ||
+                !utmCampainName ||
+                !content
+              }
+            >
+              Generar url
+            </Button>
+          </form>
+        </Grid>
 
         {finalUrl !== "" && (
-          <Grid container spacing={3} style={{ margin: "20px 0" }}>
+          <Grid container style={{ width: "100%", margin: "20px 0" }}>
             <Grid item xs={12}>
               <Paper>
-                <Typography variant="h5" component="h3">
+                <Typography variant="h6" component="h6">
                   Haz click o toca la url para copiarla
                 </Typography>
                 <CopyToClipboard text={finalUrl}>
-                  <p
+                  <TextField
                     onClick={() =>
                       toast("url copiada exitosamente", {
                         position: "bottom-right",
                       })
                     }
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      cursor: "pointer",
+                      width: "100%",
+                    }}
                     className="clickable"
-                  >
-                    {finalUrl}
-                  </p>
+                    value={finalUrl}
+                    disabled
+                    minRows={2}
+                    multiline
+                    variant="filled"
+                  />
                 </CopyToClipboard>
               </Paper>
             </Grid>
@@ -291,7 +318,7 @@ const Utms = () => {
             className: "",
             duration: 5000,
             style: {
-              background: "#363636",
+              background: "#1976D2",
               color: "#fff",
             },
 
