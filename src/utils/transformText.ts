@@ -7,3 +7,9 @@ export const transformText = (text: string): string => {
     .replace(/[\u0300-\u036f]/g, "");
   return removeAccentuation;
 };
+
+export const transformTextCampain = (text: string): string => {
+  const transformedText = text.replace(/\s/g, "-");
+  const lowerCaseText = transformedText.toLowerCase();
+  return lowerCaseText;
+};

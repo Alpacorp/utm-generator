@@ -1,0 +1,24 @@
+{
+  "audienceData": [
+    {
+      "id": 1,
+      "name": "Retargeting",
+      "shortName": "rtg"
+    },
+    {
+      "id": 2,
+      "name": "Open",
+      "shortName": "op"
+    },
+    {
+      "id": 3,
+      "name": "Bases de Datos",
+      "shortName": "bbdd"
+    },
+    {
+      "id": 4,
+      "name": "Look a like",
+      "shortName": "lal"
+    }
+  ]
+}

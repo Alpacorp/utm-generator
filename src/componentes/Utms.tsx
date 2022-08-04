@@ -86,11 +86,11 @@ const Utms = () => {
             error={false}
             required
             type="url"
-            style={{ margin: "0 10px" }}
+            style={{ margin: "20px", width: "20%" }}
             helperText="Coloca la url de la página destino"
           />
           <TextField
-            style={{ margin: "0 10px" }}
+            style={{ margin: "20px", width: "20%" }}
             id="businessLine"
             name="businessLine"
             label="Producto"
@@ -110,7 +110,7 @@ const Utms = () => {
             ))}
           </TextField>
           <TextField
-            style={{ margin: "0 10px" }}
+            style={{ margin: "20px", width: "20%" }}
             id="typeAd"
             name="typeAd"
             label="Tipo de inversión"
@@ -130,7 +130,7 @@ const Utms = () => {
             ))}
           </TextField>
           <TextField
-            style={{ margin: "0 10px" }}
+            style={{ margin: "20px", width: "20%" }}
             id="strategy"
             name="strategy"
             label="Estrategia"
@@ -150,7 +150,7 @@ const Utms = () => {
             ))}
           </TextField>
           <TextField
-            style={{ margin: "0 10px" }}
+            style={{ margin: "20px", width: "20%" }}
             id="channelType"
             name="channelType"
             label="Tipo de canal"
@@ -171,7 +171,7 @@ const Utms = () => {
             ))}
           </TextField>
           <TextField
-            style={{ margin: "0 10px" }}
+            style={{ margin: "20px", width: "20%" }}
             id="sourceMedia"
             name="sourceMedia"
             label="Selecciona"
@@ -193,7 +193,7 @@ const Utms = () => {
             ))}
           </TextField>
           <TextField
-            style={{ margin: "0 10px" }}
+            style={{ margin: "20px", width: "20%" }}
             id="medium"
             name="medium"
             label="Medio"
@@ -213,7 +213,7 @@ const Utms = () => {
             ))}
           </TextField>
           <TextField
-            style={{ margin: "0 10px" }}
+            style={{ margin: "20px", width: "20%" }}
             id="campain"
             name="campain"
             label="Nombre de la campaña"
@@ -227,7 +227,7 @@ const Utms = () => {
             helperText="Digita el nombre de la campaña"
           />
           <TextField
-            style={{ margin: "0 10px" }}
+            style={{ margin: "20px", width: "20%" }}
             id="content"
             name="content"
             label="Contenido"
@@ -244,6 +244,7 @@ const Utms = () => {
             size="large"
             type="submit"
             color="primary"
+            style={{ display: "block", margin: "20px auto" }}
           >
             Generar url
           </Button>

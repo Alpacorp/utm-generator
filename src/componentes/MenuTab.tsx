@@ -1,6 +1,8 @@
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import InsertLinkIcon from "@mui/icons-material/InsertLink";
+import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import { useState } from "react";
 import Utms from "./Utms";
 import CampainName from "./CampainName";
@@ -47,15 +49,25 @@ export const MenuTab = () => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          centered
         >
-          <Tab label="Generador de UTMs" {...a11yProps(0)} />
-          <Tab label="Nombramiento de campañas" {...a11yProps(1)} />
-          <Tab label="Registrar Información" {...a11yProps(2)} />
+          <Tab
+            style={{ fontWeight: "bold" }}
+            label="Generador de UTMs"
+            {...a11yProps(0)}
+            icon={<InsertLinkIcon />}
+          />
+          <Tab
+            style={{ fontWeight: "bold" }}
+            label="Nombramiento de campañas"
+            {...a11yProps(1)}
+            icon={<DriveFileRenameOutlineIcon />}
+          />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -63,9 +75,6 @@ export const MenuTab = () => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CampainName />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
       </TabPanel>
     </Box>
   );
