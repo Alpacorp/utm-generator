@@ -61,6 +61,10 @@ const Utms = () => {
     (item) => item.idChannelType === channelType
   );
 
+  const mediumFiltered = mediumUtmData.filter(
+    (item) => item.idChannelType === channelType
+  );
+
   const createCampainName = () => {
     const name = `${businessLine}_${typeAd}_${strategy}`;
     setCampainName(name);
@@ -105,7 +109,7 @@ const Utms = () => {
               error={false}
               required
               type="url"
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "10px" }}
               helperText="Coloca la url de la página destino"
             />
             <TextField
@@ -129,7 +133,7 @@ const Utms = () => {
               ))}
             </TextField>
             <TextField
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "10px" }}
               id="typeAd"
               name="typeAd"
               label="Tipo de inversión"
@@ -149,7 +153,7 @@ const Utms = () => {
               ))}
             </TextField>
             <TextField
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "10px" }}
               id="strategy"
               name="strategy"
               label="Estrategia"
@@ -169,7 +173,7 @@ const Utms = () => {
               ))}
             </TextField>
             <TextField
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "10px" }}
               id="channelType"
               name="channelType"
               label="Tipo de canal"
@@ -190,7 +194,7 @@ const Utms = () => {
               ))}
             </TextField>
             <TextField
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "10px" }}
               id="sourceMedia"
               name="sourceMedia"
               label="Selecciona"
@@ -212,7 +216,7 @@ const Utms = () => {
               ))}
             </TextField>
             <TextField
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "10px" }}
               id="medium"
               name="medium"
               label="Medio"
@@ -225,14 +229,14 @@ const Utms = () => {
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {mediumUtmData.map((value: any, index: number) => (
+              {mediumFiltered.map((value: any, index: number) => (
                 <MenuItem key={value.id} value={value.name}>
                   {value.name}
                 </MenuItem>
               ))}
             </TextField>
             <TextField
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "10px" }}
               id="campain"
               name="campain"
               label="Campaña"
@@ -247,7 +251,7 @@ const Utms = () => {
               helperText="producto_inversion_estrategia"
             />
             <TextField
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "10px" }}
               id="content"
               name="content"
               label="Contenido"

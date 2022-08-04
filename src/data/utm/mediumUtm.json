@@ -2,27 +2,53 @@
   "mediumUtmData": [
     {
       "id": 1,
-      "name": "email"
+      "name": "email",
+      "idChannelType": 4
     },
     {
       "id": 2,
-      "name": "phone"
+      "name": "phone",
+      "idChannelType": 3
     },
     {
       "id": 3,
-      "name": "sms"
-    },
-    {
-      "id": 4,
-      "name": "push"
+      "name": "sms",
+      "idChannelType": 4
     },
     {
       "id": 5,
-      "name": "web"
+      "name": "facebook",
+      "idChannelType": 3
     },
     {
       "id": 6,
-      "name": "banner_ppal"
+      "name": "instagram",
+      "idChannelType": 3
+    },
+    {
+      "id": 6,
+      "name": "banner_ppal",
+      "idChannelType": 1
+    },
+    {
+      "id": 7,
+      "name": "banner_secund",
+      "idChannelType": 1
+    },
+    {
+      "id": 8,
+      "name": "noticias",
+      "idChannelType": 1
+    },
+    {
+      "id": 9,
+      "name": "novedades",
+      "idChannelType": 1
+    },
+    {
+      "id": 10,
+      "name": "org",
+      "idChannelType": 2
     }
   ]
 }
