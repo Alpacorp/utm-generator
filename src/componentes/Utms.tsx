@@ -13,7 +13,7 @@ import { Toaster, toast } from "react-hot-toast";
 
 import { useForm } from "../hooks/useForm";
 import { transformText } from "../utils/transformText";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Utms.css";
 
 const { businessLineUtmData } = Business;
@@ -25,6 +25,7 @@ const { mediumUtmData } = Medium;
 
 const Utms = () => {
   const [finalUrl, setFinalUrl] = useState("");
+  const [utmCampainName, setCampainName] = useState("");
 
   const [formValues, handleInputChange, reset] = useForm({
     url: "",
@@ -46,7 +47,6 @@ const Utms = () => {
     sourceMedia,
     strategy,
     medium,
-    campain,
     content,
   } = formValues;
 
@@ -54,11 +54,21 @@ const Utms = () => {
     (item) => item.idChannelType === channelType
   );
 
+  const createCampainName = () => {
+    const name = `${businessLine}_${typeAd}_${strategy}`;
+    setCampainName(name);
+  };
+
+  useEffect(() => {
+    createCampainName();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [businessLine, typeAd, strategy]);
+
   const createUrl = () => {
+    createCampainName();
     const utmSourceName = `${sourceMedia}`;
     const utmMediumName = `${medium}`;
-    const utmCampainName = `${businessLine}_${typeAd}_${strategy}`;
-    const utmTermName = `${campain}`;
+    const utmTermName = `${content}`;
     const urlConcatenate = `${url}?utm_source=${utmSourceName}&utm_medium=${utmMediumName}&utm_campaign=${utmCampainName}&utm_term=${utmTermName}`;
     console.log("urlConcatenate", urlConcatenate);
     setFinalUrl(urlConcatenate);
@@ -216,15 +226,16 @@ const Utms = () => {
             style={{ margin: "20px", width: "20%" }}
             id="campain"
             name="campain"
-            label="Nombre de la campaña"
-            value={transformText(campain)}
+            label="Campaña"
+            value={utmCampainName}
             onChange={handleInputChange}
             variant="outlined"
             size="small"
             error={false}
             required
+            disabled
             type="text"
-            helperText="Digita el nombre de la campaña"
+            helperText="producto_inversion_estrategia"
           />
           <TextField
             style={{ margin: "20px", width: "20%" }}
