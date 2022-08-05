@@ -1,34 +1,26 @@
+import { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
-import {
-  Button,
-  Grid,
-  Paper,
-  TextareaAutosize,
-  TextField,
-  Typography,
-} from "@mui/material";
-
-import Business from "../data/utm/businessLineUtm.json";
-import Channel from "../data/utm/channelTypeUtm.json";
-import TypeAd from "../data/utm/typeAdUtm.json";
-import SourceMedia from "../data/utm/sourceMediaUtm.json";
-import Strategy from "../data/utm/strategyUtm.json";
-import Medium from "../data/utm/mediumUtm.json";
-
 import CopyToClipboard from "react-copy-to-clipboard";
+import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { Toaster, toast } from "react-hot-toast";
+
+import Business from "../data/businessLine.json";
+import Channel from "../data/channelType.json";
+import TypeAd from "../data/typeAd.json";
+import SourceMedia from "../data/sourceMedia.json";
+import Strategy from "../data/strategy.json";
+import Medium from "../data/medium.json";
 
 import { useForm } from "../hooks/useForm";
 import { transformText } from "../utils/transformText";
-import { useEffect, useState } from "react";
 import "./Utms.css";
 
-const { businessLineUtmData } = Business;
-const { channelTypeUtmData } = Channel;
-const { typeAdUtmData } = TypeAd;
-const { sourceMediaUtmData } = SourceMedia;
-const { strategyUtmData } = Strategy;
-const { mediumUtmData } = Medium;
+const { businessLineData } = Business;
+const { channelTypeData } = Channel;
+const { typeAdData } = TypeAd;
+const { sourceMediaData } = SourceMedia;
+const { strategyData } = Strategy;
+const { mediumData } = Medium;
 
 const Utms = () => {
   const [finalUrl, setFinalUrl] = useState("");
@@ -57,11 +49,11 @@ const Utms = () => {
     content,
   } = formValues;
 
-  const sourceMediaFiltered = sourceMediaUtmData.filter(
+  const sourceMediaFiltered = sourceMediaData.filter(
     (item) => item.idChannelType === channelType
   );
 
-  const mediumFiltered = mediumUtmData.filter(
+  const mediumFiltered = mediumData.filter(
     (item) => item.idChannelType === channelType
   );
 
@@ -81,21 +73,19 @@ const Utms = () => {
     const utmMediumName = `${medium}`;
     const utmTermName = content ? `&utm_term=${content}` : "";
     const urlConcatenate = `${url}?utm_source=${utmSourceName}&utm_medium=${utmMediumName}&utm_campaign=${utmCampainName}${utmTermName}`;
-    console.log("urlConcatenate", urlConcatenate);
     setFinalUrl(urlConcatenate);
   };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(formValues);
     createUrl();
     reset();
   };
 
   return (
     <div>
-      <Grid style={{ margin: "20px 10px" }}>
-        <Grid item lg={4} md={4} xs={12}>
+      <Grid container style={{ margin: "20px 10px" }}>
+        <Grid item lg={12} md={12} xs={12}>
           <form onSubmit={handleSubmit}>
             <TextField
               id="url"
@@ -126,7 +116,7 @@ const Utms = () => {
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {businessLineUtmData.map((value: any, index: number) => (
+              {businessLineData.map((value: any, index: number) => (
                 <MenuItem key={value.id} value={value.shortName}>
                   {value.name}
                 </MenuItem>
@@ -146,7 +136,7 @@ const Utms = () => {
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {typeAdUtmData.map((value: any, index: number) => (
+              {typeAdData.map((value: any, index: number) => (
                 <MenuItem key={value.id} value={value.shortName}>
                   {value.name}
                 </MenuItem>
@@ -166,7 +156,7 @@ const Utms = () => {
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {strategyUtmData.map((value: any, index: number) => (
+              {strategyData.map((value: any, index: number) => (
                 <MenuItem key={value.id} value={value.shortName}>
                   {value.name}
                 </MenuItem>
@@ -187,7 +177,7 @@ const Utms = () => {
               defaultValue=""
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {channelTypeUtmData.map((value: any, index: number) => (
+              {channelTypeData.map((value: any, index: number) => (
                 <MenuItem key={value.id} value={value.id}>
                   {value.name}
                 </MenuItem>
@@ -277,8 +267,7 @@ const Utms = () => {
                 !channelType ||
                 !sourceMedia ||
                 !medium ||
-                !utmCampainName ||
-                !content
+                !utmCampainName
               }
             >
               Generar url
@@ -296,7 +285,7 @@ const Utms = () => {
                 <CopyToClipboard text={finalUrl}>
                   <TextField
                     onClick={() =>
-                      toast("url copiada exitosamente", {
+                      toast("url copiada", {
                         position: "bottom-right",
                       })
                     }

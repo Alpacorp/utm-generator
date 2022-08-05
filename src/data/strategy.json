@@ -1,0 +1,16 @@
+{
+  "strategyData": [
+    {
+      "id": 1,
+      "name": "Branding",
+      "description": "Branding",
+      "shortName": "br"
+    },
+    {
+      "id": 2,
+      "name": "Performance",
+      "description": "Performance",
+      "shortName": "pf"
+    }
+  ]
+}

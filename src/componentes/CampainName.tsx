@@ -1,27 +1,20 @@
-import {
-  Button,
-  Grid,
-  MenuItem,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
-
-import Business from "../data/utm/businessLineUtm.json";
-import TypeAd from "../data/utm/typeAdUtm.json";
-import Strategy from "../data/utm/strategyUtm.json";
-import ModelBuy from "../data/campain/modelBuy.json";
-import Audience from "../data/campain/audience.json";
-
-import { useForm } from "../hooks/useForm";
+import { useState } from "react";
+import { Button, Grid, MenuItem, Paper, TextField } from "@mui/material";
 import toast, { Toaster } from "react-hot-toast";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { useState } from "react";
+
+import Business from "../data/businessLine.json";
+import TypeAd from "../data/typeAd.json";
+import Strategy from "../data/strategy.json";
+import ModelBuy from "../data/modelBuy.json";
+import Audience from "../data/audience.json";
+
+import { useForm } from "../hooks/useForm";
 import { transformTextCampain } from "../utils/transformText";
 
-const { businessLineUtmData } = Business;
-const { typeAdUtmData } = TypeAd;
-const { strategyUtmData } = Strategy;
+const { businessLineData } = Business;
+const { typeAdData } = TypeAd;
+const { strategyData } = Strategy;
 const { modelBuyData } = ModelBuy;
 const { audienceData } = Audience;
 
@@ -70,12 +63,12 @@ const CampainName = () => {
 
   return (
     <>
-      <Grid container style={{ margin: "20px" }}>
-        <Grid item xs={4} style={{ padding: "0 20px" }}>
+      <Grid container>
+        <Grid item lg={4} md={4} xs={12} style={{ padding: "0 20px" }}>
           <h2>Nombre Campaña</h2>
           <form onSubmit={handleSubmitCampain}>
             <TextField
-              style={{ margin: "10px", width: "100%" }}
+              style={{ margin: "10px 0", width: "100%" }}
               id="businessLine"
               name="businessLine"
               label="Producto"
@@ -88,14 +81,14 @@ const CampainName = () => {
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {businessLineUtmData.map((value: any, index: number) => (
+              {businessLineData.map((value: any, index: number) => (
                 <MenuItem key={value.id} value={value.shortName}>
                   {value.name}
                 </MenuItem>
               ))}
             </TextField>
             <TextField
-              style={{ margin: "10px", width: "100%" }}
+              style={{ margin: "10px 0", width: "100%" }}
               id="typeAd"
               name="typeAd"
               label="Tipo de inversión"
@@ -108,14 +101,14 @@ const CampainName = () => {
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {typeAdUtmData.map((value: any, index: number) => (
+              {typeAdData.map((value: any, index: number) => (
                 <MenuItem key={value.id} value={value.shortName}>
                   {value.name}
                 </MenuItem>
               ))}
             </TextField>
             <TextField
-              style={{ margin: "10px", width: "100%" }}
+              style={{ margin: "10px 0", width: "100%" }}
               id="strategy"
               name="strategy"
               label="Estrategia"
@@ -128,14 +121,14 @@ const CampainName = () => {
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {strategyUtmData.map((value: any, index: number) => (
+              {strategyData.map((value: any, index: number) => (
                 <MenuItem key={value.id} value={value.shortName}>
                   {value.name}
                 </MenuItem>
               ))}
             </TextField>
             <TextField
-              style={{ margin: "10px", width: "100%" }}
+              style={{ margin: "10px 0", width: "100%" }}
               id="modelBuy"
               name="modelBuy"
               label="Modelo de compra"
@@ -146,7 +139,6 @@ const CampainName = () => {
               onChange={handleInputChange}
               helperText="Selecciona un modelo de compra"
               required
-              defaultValue=""
             >
               <MenuItem value="-1">Selecciona</MenuItem>
               {modelBuyData.map((value: any, index: number) => (
@@ -166,55 +158,43 @@ const CampainName = () => {
             </Button>
           </form>
           {campainName !== "" && (
-            <Grid container spacing={3} style={{ margin: "20px 0" }}>
+            <Grid container style={{ margin: "20px 0" }}>
               <Grid item xs={12}>
                 <Paper>
-                  <Typography variant="h5" component="h3">
-                    Haz click o toca el nombre para copiarlo
-                  </Typography>
+                  {/* <Typography variant="h6" component="h6">
+                    Haz click o toca el nombre de campaña para copiarlo
+                  </Typography> */}
                   <CopyToClipboard text={campainName}>
-                    <p
+                    <TextField
+                      size="small"
+                      value={campainName}
+                      helperText="Haz click o toca el nombre de campaña para copiarlo"
+                      required
                       onClick={() =>
-                        toast("nombre copiado exitosamente", {
+                        toast("nombre de campaña copiado", {
                           position: "bottom-right",
                         })
                       }
-                      style={{ cursor: "pointer" }}
-                      className="clickable"
-                    >
-                      {campainName}
-                    </p>
+                      style={{
+                        cursor: "pointer",
+                        width: "100%",
+                      }}
+                      disabled
+                      minRows={2}
+                      multiline
+                      variant="filled"
+                    />
                   </CopyToClipboard>
                 </Paper>
               </Grid>
             </Grid>
           )}
-          <Toaster
-            toastOptions={{
-              // Define default options
-              className: "",
-              duration: 5000,
-              style: {
-                background: "#363636",
-                color: "#fff",
-              },
-
-              // Default options for specific types
-              success: {
-                duration: 3000,
-                theme: {
-                  primary: "green",
-                  secondary: "black",
-                },
-              },
-            }}
-          />
         </Grid>
-        <Grid item xs={4} style={{ padding: "0 20px" }}>
+        <Grid item lg={4} md={4} xs={12} style={{ padding: "0 20px" }}>
           <h2>Nombre del Grupo de Anuncios</h2>
           <form onSubmit={handleSubmitGroup}>
             <TextField
-              style={{ margin: "10px", width: "100%" }}
+              style={{ margin: "10px 0", width: "100%" }}
               id="audience"
               name="audience"
               label="Audiencia"
@@ -225,7 +205,6 @@ const CampainName = () => {
               onChange={handleInputChange}
               helperText="Selecciona un tipo de audiencia"
               required
-              defaultValue=""
             >
               <MenuItem value="-1">Selecciona</MenuItem>
               {audienceData.map((value: any, index: number) => (
@@ -245,59 +224,44 @@ const CampainName = () => {
             </Button>
           </form>
           {groupName !== "" && (
-            <Grid container spacing={3} style={{ margin: "20px 0" }}>
+            <Grid container style={{ margin: "20px 0" }}>
               <Grid item xs={12}>
                 <Paper>
-                  <Typography variant="h5" component="h4">
+                  {/* <Typography variant="h5" component="h4">
                     Haz click o toca el nombre de grupo de anuncios para
                     copiarlo
-                  </Typography>
+                  </Typography> */}
                   <CopyToClipboard text={groupName}>
-                    <p
+                    <TextField
+                      size="small"
+                      value={groupName}
+                      helperText="Haz click o toca el nombre del grupo de anuncios para copiarlo"
+                      required
                       onClick={() =>
-                        toast(
-                          "nombre de grupo de anuncios copiado exitosamente",
-                          {
-                            position: "bottom-right",
-                          }
-                        )
+                        toast("nombre de grupo de anuncios copiado", {
+                          position: "bottom-right",
+                        })
                       }
-                      style={{ cursor: "pointer" }}
-                      className="clickable"
-                    >
-                      {groupName}
-                    </p>
+                      style={{
+                        cursor: "pointer",
+                        width: "100%",
+                      }}
+                      disabled
+                      minRows={2}
+                      multiline
+                      variant="filled"
+                    />
                   </CopyToClipboard>
                 </Paper>
               </Grid>
             </Grid>
           )}
-          <Toaster
-            toastOptions={{
-              // Define default options
-              className: "",
-              duration: 5000,
-              style: {
-                background: "#363636",
-                color: "#fff",
-              },
-
-              // Default options for specific types
-              success: {
-                duration: 3000,
-                theme: {
-                  primary: "green",
-                  secondary: "black",
-                },
-              },
-            }}
-          />
         </Grid>
-        <Grid item xs={4} style={{ padding: "0 20px" }}>
+        <Grid item lg={4} md={4} xs={12} style={{ padding: "0 20px" }}>
           <h2>Nombre del Anuncio</h2>
           <form onSubmit={handleSubmitAd}>
             <TextField
-              style={{ margin: "10px", width: "100%" }}
+              style={{ margin: "10px 0", width: "100%" }}
               id="reference"
               name="reference"
               label="Referencia"
@@ -307,7 +271,6 @@ const CampainName = () => {
               onChange={handleInputChange}
               helperText="Selecciona un tipo de audiencia"
               required
-              defaultValue=""
             />
             <Button
               variant="contained"
@@ -320,24 +283,32 @@ const CampainName = () => {
             </Button>
           </form>
           {adName !== "" && (
-            <Grid container spacing={3} style={{ margin: "20px 0" }}>
+            <Grid container style={{ margin: "20px 0" }}>
               <Grid item xs={12}>
                 <Paper>
-                  <Typography variant="h5" component="h4">
+                  {/* <Typography variant="h5" component="h4">
                     Haz click o toca el nombre anuncio para copiarlo
-                  </Typography>
+                  </Typography> */}
                   <CopyToClipboard text={adName}>
-                    <p
+                    <TextField
+                      size="small"
+                      value={adName}
+                      helperText="Haz click o toca el nombre de anuncio para copiarlo"
+                      required
                       onClick={() =>
-                        toast("nombre de anuncio copiado exitosamente", {
+                        toast("nombre de anuncio copiado", {
                           position: "bottom-right",
                         })
                       }
-                      style={{ cursor: "pointer" }}
-                      className="clickable"
-                    >
-                      {adName}
-                    </p>
+                      style={{
+                        cursor: "pointer",
+                        width: "100%",
+                      }}
+                      disabled
+                      minRows={2}
+                      multiline
+                      variant="filled"
+                    />
                   </CopyToClipboard>
                 </Paper>
               </Grid>
@@ -349,7 +320,7 @@ const CampainName = () => {
               className: "",
               duration: 5000,
               style: {
-                background: "#363636",
+                background: "#b01630",
                 color: "#fff",
               },
 
