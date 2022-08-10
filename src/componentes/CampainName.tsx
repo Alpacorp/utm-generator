@@ -169,9 +169,6 @@ const CampainName = () => {
             <Grid container style={{ margin: "20px 0" }}>
               <Grid item xs={12}>
                 <Paper>
-                  {/* <Typography variant="h6" component="h6">
-                    Haz click o toca el nombre de campaña para copiarlo
-                  </Typography> */}
                   <CopyToClipboard text={campainName}>
                     <TextField
                       size="small"
@@ -306,9 +303,6 @@ const CampainName = () => {
             <Grid container style={{ margin: "20px 0" }}>
               <Grid item xs={12}>
                 <Paper>
-                  {/* <Typography variant="h5" component="h4">
-                    Haz click o toca el nombre anuncio para copiarlo
-                  </Typography> */}
                   <CopyToClipboard text={adName}>
                     <TextField
                       size="small"
