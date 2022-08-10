@@ -164,6 +164,11 @@
       "id": 33,
       "name": "home_cuentamiga_digital",
       "idChannelType": 1
+    },
+    {
+      "id": 34,
+      "name": "detalle_de_producto",
+      "idChannelType": 1
     }
   ]
 }
