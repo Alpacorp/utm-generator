@@ -54,6 +54,11 @@
       "id": 11,
       "name": "qr_biometria",
       "idChannelType": 1
+    },
+    {
+      "id": 12,
+      "name": "detalle_de_producto",
+      "idChannelType": 1
     }
   ]
 }
