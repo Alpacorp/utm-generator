@@ -49,6 +49,16 @@
       "id": 10,
       "name": "org",
       "idChannelType": 2
+    },
+    {
+      "id": 11,
+      "name": "boton_head",
+      "idChannelType": 1
+    },
+    {
+      "id": 12,
+      "name": "boton_footer",
+      "idChannelType": 1
     }
   ]
 }
