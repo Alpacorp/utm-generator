@@ -84,7 +84,12 @@ const Utms = () => {
 
   return (
     <div>
-      <Grid container style={{ margin: "20px 10px" }}>
+      <Grid
+        container
+        style={{ margin: "20px 10px" }}
+        itemScope
+        itemType="https://schema.org/Thing"
+      >
         <Grid item lg={12} md={12} xs={12}>
           <form onSubmit={handleSubmit}>
             <TextField

@@ -52,11 +52,21 @@
     },
     {
       "id": 11,
-      "name": "boton_head",
+      "name": "qr_biometria",
       "idChannelType": 1
     },
     {
       "id": 12,
+      "name": "detalle_de_producto",
+      "idChannelType": 1
+    },
+    {
+      "id": 13,
+      "name": "boton_head",
+      "idChannelType": 1
+    },
+    {
+      "id": 14,
       "name": "boton_footer",
       "idChannelType": 1
     }

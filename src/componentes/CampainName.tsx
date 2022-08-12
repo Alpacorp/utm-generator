@@ -64,8 +64,16 @@ const CampainName = () => {
   return (
     <>
       <Grid container>
-        <Grid item lg={4} md={4} xs={12} style={{ padding: "0 20px" }}>
-          <h2>Nombre Campaña</h2>
+        <Grid
+          item
+          lg={4}
+          md={4}
+          xs={12}
+          style={{ padding: "0 20px" }}
+          itemScope
+          itemType="https://schema.org/Thing"
+        >
+          <h2 itemProp="description">Nombre Campaña</h2>
           <form onSubmit={handleSubmitCampain}>
             <TextField
               style={{ margin: "10px 0", width: "100%" }}
@@ -161,9 +169,6 @@ const CampainName = () => {
             <Grid container style={{ margin: "20px 0" }}>
               <Grid item xs={12}>
                 <Paper>
-                  {/* <Typography variant="h6" component="h6">
-                    Haz click o toca el nombre de campaña para copiarlo
-                  </Typography> */}
                   <CopyToClipboard text={campainName}>
                     <TextField
                       size="small"
@@ -190,8 +195,16 @@ const CampainName = () => {
             </Grid>
           )}
         </Grid>
-        <Grid item lg={4} md={4} xs={12} style={{ padding: "0 20px" }}>
-          <h2>Nombre del Grupo de Anuncios</h2>
+        <Grid
+          item
+          lg={4}
+          md={4}
+          xs={12}
+          style={{ padding: "0 20px" }}
+          itemScope
+          itemType="https://schema.org/Thing"
+        >
+          <h2 itemProp="description">Nombre del Grupo de Anuncios</h2>
           <form onSubmit={handleSubmitGroup}>
             <TextField
               style={{ margin: "10px 0", width: "100%" }}
@@ -227,10 +240,6 @@ const CampainName = () => {
             <Grid container style={{ margin: "20px 0" }}>
               <Grid item xs={12}>
                 <Paper>
-                  {/* <Typography variant="h5" component="h4">
-                    Haz click o toca el nombre de grupo de anuncios para
-                    copiarlo
-                  </Typography> */}
                   <CopyToClipboard text={groupName}>
                     <TextField
                       size="small"
@@ -257,8 +266,16 @@ const CampainName = () => {
             </Grid>
           )}
         </Grid>
-        <Grid item lg={4} md={4} xs={12} style={{ padding: "0 20px" }}>
-          <h2>Nombre del Anuncio</h2>
+        <Grid
+          item
+          lg={4}
+          md={4}
+          xs={12}
+          style={{ padding: "0 20px" }}
+          itemScope
+          itemType="https://schema.org/Thing"
+        >
+          <h2 itemProp="description">Nombre del Anuncio</h2>
           <form onSubmit={handleSubmitAd}>
             <TextField
               style={{ margin: "10px 0", width: "100%" }}
@@ -286,9 +303,6 @@ const CampainName = () => {
             <Grid container style={{ margin: "20px 0" }}>
               <Grid item xs={12}>
                 <Paper>
-                  {/* <Typography variant="h5" component="h4">
-                    Haz click o toca el nombre anuncio para copiarlo
-                  </Typography> */}
                   <CopyToClipboard text={adName}>
                     <TextField
                       size="small"

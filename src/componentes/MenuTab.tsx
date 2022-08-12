@@ -56,18 +56,22 @@ export const MenuTab = () => {
           aria-label="basic tabs example"
           variant="scrollable"
           scrollButtons="auto"
+          itemScope
+          itemType="http://schema.org/ItemList"
         >
           <Tab
             style={{ fontWeight: "bold" }}
             label="Generador de UTMs"
             {...a11yProps(0)}
             icon={<InsertLinkIcon />}
+            itemProp="itemListElement"
           />
           <Tab
             style={{ fontWeight: "bold" }}
             label="Nombramiento de campañas"
             {...a11yProps(1)}
             icon={<DriveFileRenameOutlineIcon />}
+            itemProp="itemListElement"
           />
         </Tabs>
       </Box>

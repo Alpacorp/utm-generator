@@ -159,6 +159,11 @@
       "id": 32,
       "name": "comdata",
       "idChannelType": 4
+    },
+    {
+      "id": 33,
+      "name": "home_cuentamiga_digital",
+      "idChannelType": 1
     }
   ]
 }
