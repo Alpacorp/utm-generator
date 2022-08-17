@@ -86,7 +86,7 @@ const Utms = () => {
     <div>
       <Grid
         container
-        style={{ margin: "20px 10px" }}
+        style={{ margin: "20px 0" }}
         itemScope
         itemType="https://schema.org/Thing"
       >
