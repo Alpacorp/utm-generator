@@ -69,6 +69,11 @@
       "id": 14,
       "name": "boton_footer",
       "idChannelType": 1
+    },
+    {
+      "id": 15,
+      "name": "pantallas",
+      "idChannelType": 1
     }
   ]
 }
