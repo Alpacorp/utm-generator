@@ -169,6 +169,11 @@
       "id": 34,
       "name": "red_de_cajeros",
       "idChannelType": 1
+    },
+    {
+      "id": 35,
+      "name": "portaltransaccional",
+      "idChannelType": 1
     }
   ]
 }
