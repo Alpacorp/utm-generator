@@ -26,11 +26,6 @@
       "idChannelType": 3
     },
     {
-      "id": 6,
-      "name": "banner_ppal",
-      "idChannelType": 1
-    },
-    {
       "id": 7,
       "name": "banner_secund",
       "idChannelType": 1
@@ -78,6 +73,16 @@
     {
       "id": 16,
       "name": "notificaciones",
+      "idChannelType": 1
+    },
+    {
+      "id": 17,
+      "name": "banner_ppal",
+      "idChannelType": 1
+    },
+    {
+      "id": 18,
+      "name": "qr_rompetrafico",
       "idChannelType": 1
     }
   ]
