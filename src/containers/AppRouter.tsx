@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Login from "../componentes/Login";
-import { MenuTab } from "../componentes/MenuTab";
+import { LoginPage } from "../components/LoginPage";
+import { MenuTab } from "../components/MenuTab";
 import Layout from "./Layout";
 
 const AppRouter = () => {
@@ -32,7 +32,7 @@ const AppRouter = () => {
             {authStatus ? (
               <Route path="/*" element={<MenuTab />} />
             ) : (
-              <Route path="/auth/*" element={<Login />} />
+              <Route path="/auth/*" element={<LoginPage />} />
             )}
 
             <Route path="/*" element={<Navigate to="/auth/login" />} />
