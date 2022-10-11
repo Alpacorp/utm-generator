@@ -1,11 +1,22 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { LoginPage } from "../components/LoginPage";
 import { MenuTab } from "../components/MenuTab";
+import { useAuthStore } from "../hooks/useAuthStore";
 import Layout from "./Layout";
+import { useEffect } from "react";
 
 const AppRouter = () => {
   const appStatus = process.env.REACT_APP_MAINTENANCE;
-  const authStatus = false;
+
+  const { status, checkAuthToken, user, startLogout } = useAuthStore();
+
+  useEffect(() => {
+    checkAuthToken();
+  }, []);
+
+  if (status === "checking") {
+    return <h3>Cargando ...</h3>;
+  }
 
   return (
     <>
@@ -27,15 +38,21 @@ const AppRouter = () => {
               itemProp="logo"
               src="https://www.bancocajasocial.com/portalserver/content/atom/ed3567c4-64a3-462a-93a4-7c6466ef50e8/content/General/Logo%20Banco%20Caja%20Social?id=ff6b0aed-6fb8-4be2-9326-cb5847feac22"
             />
+            <span>{user.name}</span>
+            <button onClick={startLogout}>salir</button>
           </div>
           <Routes>
-            {authStatus ? (
-              <Route path="/*" element={<MenuTab />} />
+            {status === "not-authenticated" ? (
+              <>
+                <Route path="/auth/*" element={<LoginPage />} />
+                <Route path="/*" element={<Navigate to="/auth/login" />} />
+              </>
             ) : (
-              <Route path="/auth/*" element={<LoginPage />} />
+              <>
+                <Route path="/" element={<MenuTab />} />
+                <Route path="/*" element={<Navigate to="/" />} />
+              </>
             )}
-
-            <Route path="/*" element={<Navigate to="/auth/login" />} />
           </Routes>
         </Layout>
       )}

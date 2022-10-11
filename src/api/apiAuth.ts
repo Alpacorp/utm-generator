@@ -10,4 +10,13 @@ const authApi = axios.create({
 
 // todo add interceptor to handle errors
 
+authApi.interceptors.request.use((config: any) => {
+  config.headers = {
+    ...config.headers,
+    "x-token": localStorage.getItem("token") || "",
+  };
+
+  return config;
+});
+
 export default authApi;
