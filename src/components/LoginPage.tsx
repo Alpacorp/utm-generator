@@ -1,23 +1,16 @@
-import { useAuthStore } from "../hooks/useAuthStore";
-import { useForm2 } from "../hooks/useForm2";
-import "./LoginPage.css";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
+import { Button, Grid, TextField, Typography } from "@mui/material";
+import { useAuthStore } from "../hooks/useAuthStore";
+import { useForm2 } from "../hooks/useForm2";
 
 const loginFormFields = {
   loginEmail: "",
   loginPassword: "",
 };
 
-const registerFormFields = {
-  registerName: "",
-  registerEmail: "",
-  registerPassword: "",
-  registerPassword2: "",
-};
-
 export const LoginPage = () => {
-  const { startLogin, errorMessage, startRegister } = useAuthStore();
+  const { startLogin, errorMessage } = useAuthStore();
 
   const {
     loginEmail,
@@ -25,131 +18,79 @@ export const LoginPage = () => {
     onInputChange: onLoginInputChange,
   } = useForm2(loginFormFields);
 
-  const {
-    registerName,
-    registerEmail,
-    registerPassword,
-    registerPassword2,
-    onInputChange: onRegisterInputChange,
-  } = useForm2(registerFormFields);
-
   const loginSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("loginSubmit", { loginEmail, loginPassword });
     startLogin({ email: loginEmail, password: loginPassword });
-  };
-
-  const registerSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (registerPassword !== registerPassword2) {
-      Swal.fire("Error", "Las contraseñas deben de ser iguales", "error");
-      return;
-    }
-
-    console.log("registerSubmit", {
-      registerName,
-      registerEmail,
-      registerPassword,
-      registerPassword2,
-    });
-
-    startRegister({
-      name: registerName,
-      email: registerEmail,
-      password: registerPassword,
-    });
   };
 
   useEffect(() => {
     if (errorMessage !== undefined) {
-      Swal.fire("Error en la autenticación", errorMessage, "error");
+      Swal.fire("Alerta", errorMessage, "error");
     }
   }, [errorMessage]);
 
   return (
-    <div className="container login-container">
-      <div className="row">
-        <div className="col-md-6 login-form-1">
-          <h3>Ingreso</h3>
-          <form onSubmit={loginSubmit}>
-            <div className="form-group mb-2">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Correo"
-                name="loginEmail"
-                value={loginEmail}
-                onChange={onLoginInputChange}
-              />
-            </div>
-            <div className="form-group mb-2">
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Contraseña"
-                name="loginPassword"
-                value={loginPassword}
-                onChange={onLoginInputChange}
-                autoComplete="off"
-              />
-            </div>
-            <div className="d-grid gap-2">
-              <input type="submit" className="btnSubmit" value="Login" />
-            </div>
-          </form>
-        </div>
-        <div className="col-md-6 login-form-2">
-          <h3>Registro</h3>
-          <form onSubmit={registerSubmit}>
-            <div className="form-group mb-2">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Nombre"
-                name="registerName"
-                value={registerName}
-                onChange={onRegisterInputChange}
-              />
-            </div>
-            <div className="form-group mb-2">
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Correo"
-                name="registerEmail"
-                value={registerEmail}
-                onChange={onRegisterInputChange}
-              />
-            </div>
-            <div className="form-group mb-2">
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Contraseña"
-                name="registerPassword"
-                value={registerPassword}
-                onChange={onRegisterInputChange}
-                autoComplete="off"
-              />
-            </div>
-            <div className="form-group mb-2">
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Repita la contraseña"
-                name="registerPassword2"
-                value={registerPassword2}
-                onChange={onRegisterInputChange}
-                autoComplete="off"
-              />
-            </div>
-            <div className="d-grid gap-2">
-              <input type="submit" className="btnSubmit" value="Crear cuenta" />
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    <Grid
+      container
+      itemScope
+      itemType="https://schema.org/Thing"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        height: "100vh",
+        alignItems: "center",
+      }}
+    >
+      <Grid item lg={12} md={12} xs={12}>
+        <Typography variant="h6" color="primary">
+          Inicia Sesión
+        </Typography>
+        <form onSubmit={loginSubmit}>
+          <Grid style={{ margin: "10px 0" }}>
+            <TextField
+              type="text"
+              placeholder="Correo"
+              name="loginEmail"
+              value={loginEmail}
+              onChange={onLoginInputChange}
+              variant="outlined"
+              helperText="Digita tu correo electrónico"
+              size="small"
+              required
+              label="Correo"
+              autoFocus
+            />
+          </Grid>
+          <Grid style={{ margin: "10px 0" }}>
+            <TextField
+              type="password"
+              placeholder="Contraseña"
+              name="loginPassword"
+              value={loginPassword}
+              onChange={onLoginInputChange}
+              autoComplete="off"
+              variant="outlined"
+              helperText="Digita tu contraseña"
+              size="small"
+              required
+              label="Contraseña"
+            />
+          </Grid>
+          <Grid style={{ margin: "10px 0" }}>
+            <Button
+              variant="contained"
+              size="large"
+              color="primary"
+              disabled={loginEmail.length === 0 || loginPassword.length === 0}
+              type="submit"
+              className="btnSubmit"
+              value="Login"
+            >
+              Ingresar
+            </Button>
+          </Grid>
+        </form>
+      </Grid>
+    </Grid>
   );
 };

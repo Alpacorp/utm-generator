@@ -1,11 +1,16 @@
+import { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import InsertLinkIcon from "@mui/icons-material/InsertLink";
+import PostAddIcon from "@mui/icons-material/PostAdd";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
-import { useState } from "react";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Utms from "./Utms";
 import CampainName from "./CampainName";
+import CreateUsers from "./CreateUsers";
+import { useAuthStore } from "../hooks/useAuthStore";
+import DataManagement from "./DataManagement";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -42,6 +47,15 @@ function a11yProps(index: number) {
 
 export const MenuTab = () => {
   const [value, setValue] = useState(0);
+  const { user } = useAuthStore();
+
+  const validateAdmin = () => {
+    if (user?.role === "admin") {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -73,6 +87,22 @@ export const MenuTab = () => {
             icon={<DriveFileRenameOutlineIcon />}
             itemProp="itemListElement"
           />
+          <Tab
+            style={{ fontWeight: "bold" }}
+            label="Administración de datos"
+            {...a11yProps(1)}
+            icon={<PostAddIcon />}
+            itemProp="itemListElement"
+          />
+          {validateAdmin() && (
+            <Tab
+              style={{ fontWeight: "bold" }}
+              label="Creación de usuarios"
+              {...a11yProps(3)}
+              icon={<GroupAddIcon />}
+              itemProp="itemListElement"
+            />
+          )}
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -80,6 +110,12 @@ export const MenuTab = () => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CampainName />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <DataManagement />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <CreateUsers />
       </TabPanel>
     </Box>
   );

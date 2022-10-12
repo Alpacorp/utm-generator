@@ -1,4 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Typography, Button, Grid } from "@mui/material";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { LoginPage } from "../components/LoginPage";
 import { MenuTab } from "../components/MenuTab";
 import { useAuthStore } from "../hooks/useAuthStore";
@@ -12,6 +14,7 @@ const AppRouter = () => {
 
   useEffect(() => {
     checkAuthToken();
+    // eslint-disable-next-line
   }, []);
 
   if (status === "checking") {
@@ -38,8 +41,32 @@ const AppRouter = () => {
               itemProp="logo"
               src="https://www.bancocajasocial.com/portalserver/content/atom/ed3567c4-64a3-462a-93a4-7c6466ef50e8/content/General/Logo%20Banco%20Caja%20Social?id=ff6b0aed-6fb8-4be2-9326-cb5847feac22"
             />
-            <span>{user.name}</span>
-            <button onClick={startLogout}>salir</button>
+
+            {status === "authenticated" ? (
+              <Grid style={{ margin: "20px 0" }}>
+                <Typography variant="h6" color="primary" fontSize={18}>
+                  Hola <strong>{user?.name || "Usuario"}</strong>
+                </Typography>
+                <Typography
+                  variant="inherit"
+                  color="primary"
+                  fontSize={13}
+                  style={{ margin: "5px 0" }}
+                >
+                  Perfil <strong>{user.role || "Rol"}</strong>
+                </Typography>
+                <Button
+                  startIcon={<ExitToAppIcon />}
+                  size="small"
+                  onClick={startLogout}
+                  variant="outlined"
+                >
+                  Cerrar Sesión
+                </Button>
+              </Grid>
+            ) : (
+              ""
+            )}
           </div>
           <Routes>
             {status === "not-authenticated" ? (

@@ -73,7 +73,7 @@ const CampainName = () => {
           itemScope
           itemType="https://schema.org/Thing"
         >
-          <h2 itemProp="description">Nombre Campaña</h2>
+          <h3 itemProp="description">Nombre Campaña</h3>
           <form onSubmit={handleSubmitCampain}>
             <TextField
               style={{ margin: "10px 0", width: "100%" }}
@@ -204,7 +204,7 @@ const CampainName = () => {
           itemScope
           itemType="https://schema.org/Thing"
         >
-          <h2 itemProp="description">Nombre del Grupo de Anuncios</h2>
+          <h3 itemProp="description">Nombre del Grupo de Anuncios</h3>
           <form onSubmit={handleSubmitGroup}>
             <TextField
               style={{ margin: "10px 0", width: "100%" }}
@@ -275,7 +275,7 @@ const CampainName = () => {
           itemScope
           itemType="https://schema.org/Thing"
         >
-          <h2 itemProp="description">Nombre del Anuncio</h2>
+          <h3 itemProp="description">Nombre del Anuncio</h3>
           <form onSubmit={handleSubmitAd}>
             <TextField
               style={{ margin: "10px 0", width: "100%" }}
