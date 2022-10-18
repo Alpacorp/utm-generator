@@ -4,7 +4,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { Toaster, toast } from "react-hot-toast";
 
-import Business from "../data/businessLine.json";
+// import Business from "../data/businessLine.json";
 import Channel from "../data/channelType.json";
 import TypeAd from "../data/typeAd.json";
 import SourceMedia from "../data/sourceMedia.json";
@@ -14,13 +14,30 @@ import Medium from "../data/medium.json";
 import { useForm } from "../hooks/useForm";
 import { transformText } from "../utils/transformText";
 import "./Utms.css";
+import { useSelector } from "react-redux";
+import { useBusinessLine } from "../hooks/useBusinessLine";
+import { useTypeAd } from "../hooks/useTypeAd";
+import { useStrategy } from "../hooks/useStrategy";
 
-const { businessLineData } = Business;
+// const { businessLineData } = Business;
 const { channelTypeData } = Channel;
 const { typeAdData } = TypeAd;
 const { sourceMediaData } = SourceMedia;
 const { strategyData } = Strategy;
 const { mediumData } = Medium;
+
+const utmFormFields = {
+  businessLine: "",
+  channelType: "",
+  typeAd: "",
+  sourceMedia: "",
+  strategy: "",
+  medium: "",
+  campaign: "",
+  content: "",
+  term: "",
+  utm: "",
+};
 
 const Utms = () => {
   const [finalUrl, setFinalUrl] = useState("");
@@ -61,6 +78,26 @@ const Utms = () => {
     const name = `${businessLine}_${typeAd}_${strategy}`;
     setCampainName(name);
   };
+
+  const { businessLine: businessLineData } = useSelector(
+    (state: any) => state.businessLine
+  );
+
+  const { typeAd: typeAdData } = useSelector((state: any) => state.typeAd);
+
+  const { strategy: strategyData } = useSelector(
+    (state: any) => state.strategy
+  );
+
+  const { businessLineStore } = useBusinessLine();
+  const { typeAdStore } = useTypeAd();
+  const { strategyStore } = useStrategy();
+
+  useEffect(() => {
+    businessLineStore();
+    typeAdStore();
+    strategyStore();
+  }, []);
 
   useEffect(() => {
     createCampainName();
@@ -116,15 +153,15 @@ const Utms = () => {
               variant="outlined"
               select
               size="small"
-              value={businessLine}
+              value={businessLine ? businessLine : ""}
               onChange={handleInputChange}
               helperText="Selecciona un producto"
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {businessLineData.map((value: any, index: number) => (
-                <MenuItem key={value.id} value={value.shortName}>
-                  {value.name}
+              {businessLineData?.businessLines?.map((value: any) => (
+                <MenuItem key={value._id} value={value.shortname}>
+                  {value.name + " - " + value.shortname + " - " + value._id}
                 </MenuItem>
               ))}
             </TextField>
@@ -136,15 +173,15 @@ const Utms = () => {
               variant="outlined"
               select
               size="small"
-              value={typeAd}
+              value={typeAd ? typeAd : ""}
               onChange={handleInputChange}
               helperText="Selecciona el tipo de inversión"
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {typeAdData.map((value: any, index: number) => (
-                <MenuItem key={value.id} value={value.shortName}>
-                  {value.name}
+              {typeAdData?.typeAd?.map((value: any) => (
+                <MenuItem key={value._id} value={value.shortname}>
+                  {value.name + " - " + value.shortname + " - " + value._id}
                 </MenuItem>
               ))}
             </TextField>
@@ -162,9 +199,9 @@ const Utms = () => {
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {strategyData.map((value: any, index: number) => (
-                <MenuItem key={value.id} value={value.shortName}>
-                  {value.name}
+              {strategyData?.strategy?.map((value: any, index: number) => (
+                <MenuItem key={value._id} value={value.shortname}>
+                  {value.name + " - " + value.shortname + " - " + value._id}
                 </MenuItem>
               ))}
             </TextField>
