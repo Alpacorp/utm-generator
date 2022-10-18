@@ -193,7 +193,7 @@ const Utms = () => {
               variant="outlined"
               select
               size="small"
-              value={strategy}
+              value={strategy ? strategy : ""}
               onChange={handleInputChange}
               helperText="Selecciona la estrategia"
               required
