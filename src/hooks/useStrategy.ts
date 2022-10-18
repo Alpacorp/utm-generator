@@ -19,7 +19,6 @@ export const useStrategy = () => {
 
     try {
       const { data } = await apiStrategy.get("/strategy/strategy");
-      console.log("response", data);
       dispatch(onGetStrategySuccess(data));
     } catch (error: any) {
       console.log("error", error);
