@@ -19,7 +19,6 @@ export const useTypeAd = () => {
 
     try {
       const { data } = await apiTypeAd.get("/typead/typead");
-      console.log("response", data);
       dispatch(onGetTypeAdSuccess(data));
     } catch (error: any) {
       console.log("error", error);

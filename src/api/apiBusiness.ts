@@ -11,6 +11,14 @@ export const getBusinessLineData = async () => {
   return data;
 };
 
+export const updateBusinessLineData = async (businessLine: any) => {
+  const { data } = await apiBusiness.put(
+    `/businessline/${businessLine.id}`,
+    businessLine
+  );
+  return data;
+};
+
 // todo add interceptor to handle errors
 
 apiBusiness.interceptors.request.use((config: any) => {

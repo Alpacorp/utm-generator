@@ -2,18 +2,19 @@ import axios from "axios";
 
 const baseURL = process.env.REACT_APP_URL;
 
-export const apiStrategy = axios.create({
+export const apiChannelType = axios.create({
   baseURL: baseURL,
 });
 
-export const getStrategyData = async () => {
-  const { data } = await apiStrategy.get("/strategy/strategy");
+export const getChannelTypeData = async () => {
+  const { data } = await apiChannelType.get("/channeltype/channeltype");
+  console.log("data channel type", data);
   return data;
 };
 
 // todo add interceptor to handle errors
 
-apiStrategy.interceptors.request.use((config: any) => {
+apiChannelType.interceptors.request.use((config: any) => {
   config.headers = {
     ...config.headers,
     "x-token": localStorage.getItem("token") || "",
