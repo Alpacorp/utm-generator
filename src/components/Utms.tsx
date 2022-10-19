@@ -18,12 +18,10 @@ import { useSelector } from "react-redux";
 import { useBusinessLine } from "../hooks/useBusinessLine";
 import { useTypeAd } from "../hooks/useTypeAd";
 import { useStrategy } from "../hooks/useStrategy";
+import { useChannelType } from "../hooks/useChannelType";
+import { useSourceMedia } from "../hooks/useSourceMedia";
+import { useMedium } from "../hooks/useMedium";
 
-// const { businessLineData } = Business;
-const { channelTypeData } = Channel;
-const { typeAdData } = TypeAd;
-const { sourceMediaData } = SourceMedia;
-const { strategyData } = Strategy;
 const { mediumData } = Medium;
 
 const utmFormFields = {
@@ -66,14 +64,6 @@ const Utms = () => {
     content,
   } = formValues;
 
-  const sourceMediaFiltered = sourceMediaData.filter(
-    (item) => item.idChannelType === channelType
-  );
-
-  const mediumFiltered = mediumData.filter(
-    (item) => item.idChannelType === channelType
-  );
-
   const createCampainName = () => {
     const name = `${businessLine}_${typeAd}_${strategy}`;
     setCampainName(name);
@@ -89,14 +79,38 @@ const Utms = () => {
     (state: any) => state.strategy
   );
 
+  const { channelType: channelTypeData } = useSelector(
+    (state: any) => state.channelType
+  );
+
+  const { sourceMedia: sourceMediaData } = useSelector(
+    (state: any) => state.sourceMedia
+  );
+
+  const { medium: mediumData } = useSelector((state: any) => state.medium);
+
   const { businessLineStore } = useBusinessLine();
   const { typeAdStore } = useTypeAd();
   const { strategyStore } = useStrategy();
+  const { channelTypeStore } = useChannelType();
+  const { sourceMediaStore } = useSourceMedia();
+  const { mediumStore } = useMedium();
+
+  const sourceMediaFiltered = sourceMediaData?.source?.filter(
+    (item: any) => item.idchanneltype === channelType
+  );
+
+  const mediumFiltered = mediumData?.mediums?.filter(
+    (item: any) => item.idchanneltype === channelType
+  );
 
   useEffect(() => {
     businessLineStore();
     typeAdStore();
     strategyStore();
+    channelTypeStore();
+    sourceMediaStore();
+    mediumStore();
   }, []);
 
   useEffect(() => {
@@ -117,6 +131,16 @@ const Utms = () => {
     event.preventDefault();
     createUrl();
     reset();
+    // desplazar hacia abajo
+
+    const element = document.getElementById("finalUrl");
+    element?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "end",
+    });
+
+    // console.log("finalUrl", finalUrl);
   };
 
   return (
@@ -213,16 +237,16 @@ const Utms = () => {
               variant="outlined"
               select
               size="small"
-              value={channelType}
+              value={channelType ? channelType : ""}
               onChange={handleInputChange}
               helperText="Selecciona el tipo de canal"
               required
               defaultValue=""
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {channelTypeData.map((value: any, index: number) => (
-                <MenuItem key={value.id} value={value.id}>
-                  {value.name}
+              {channelTypeData?.channels?.map((value: any, index: number) => (
+                <MenuItem key={value._id} value={value.idchanneltype}>
+                  {value.name + " - " + value._id + " - " + value.idchanneltype}
                 </MenuItem>
               ))}
             </TextField>
@@ -234,7 +258,7 @@ const Utms = () => {
               variant="outlined"
               select
               size="small"
-              value={sourceMedia === -1 ? "" : sourceMedia}
+              value={sourceMedia ? sourceMedia : ""}
               onChange={handleInputChange}
               helperText="Selecciona la fuente de publicación"
               required
@@ -242,9 +266,9 @@ const Utms = () => {
               disabled={channelType === "" ? true : false}
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {sourceMediaFiltered.map((value: any, index: number) => (
-                <MenuItem key={value.id} value={value.name}>
-                  {value.name}
+              {sourceMediaFiltered?.map((value: any, index: number) => (
+                <MenuItem key={value._id} value={value.name}>
+                  {value.name + " - " + value._id + " - " + value.idchanneltype}
                 </MenuItem>
               ))}
             </TextField>
@@ -254,17 +278,18 @@ const Utms = () => {
               name="medium"
               label="Medio"
               variant="outlined"
+              disabled={channelType === "" ? true : false}
               select
               size="small"
-              value={medium}
+              value={medium ? medium : ""}
               onChange={handleInputChange}
               helperText="Selecciona el medio"
               required
             >
               <MenuItem value="">Selecciona</MenuItem>
-              {mediumFiltered.map((value: any, index: number) => (
-                <MenuItem key={value.id} value={value.name}>
-                  {value.name}
+              {mediumFiltered?.map((value: any, index: number) => (
+                <MenuItem key={value._id} value={value.name}>
+                  {value.name + " - " + value._id + " - " + value.idchanneltype}
                 </MenuItem>
               ))}
             </TextField>
@@ -339,6 +364,7 @@ const Utms = () => {
                     className="clickable"
                     value={finalUrl}
                     disabled
+                    id="finalUrl"
                     minRows={2}
                     multiline
                     variant="filled"

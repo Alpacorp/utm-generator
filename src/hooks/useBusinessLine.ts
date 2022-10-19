@@ -31,7 +31,25 @@ export const useBusinessLine = () => {
     }
   };
 
+  const updateBusinessLineStore = async (id: string, data: any) => {
+    dispatch(onCheckingbusiness());
+
+    try {
+      await apiBusiness.put(`/businessline/${id}`, data);
+      // dispatch(onGetbusinessSuccess(data));
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(
+        onGetbusinessError(error.response.data?.msg || "BusinessLine error")
+      );
+      setTimeout(() => {
+        dispatch(clearErrorMessagebusiness());
+      }, 20);
+    }
+  };
+
   return {
     businessLineStore,
+    updateBusinessLineStore,
   };
 };

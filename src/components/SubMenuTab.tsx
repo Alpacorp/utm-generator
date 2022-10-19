@@ -2,16 +2,15 @@ import { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import InsertLinkIcon from "@mui/icons-material/InsertLink";
-import PostAddIcon from "@mui/icons-material/PostAdd";
-import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import Utms from "./Utms";
-import CampainName from "./CampainName";
-import CreateUsers from "./CreateUsers";
+import BusinessIcon from "@mui/icons-material/Business";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import PsychologyIcon from "@mui/icons-material/Psychology";
+import GridViewIcon from "@mui/icons-material/GridView";
+import MediationIcon from "@mui/icons-material/Mediation";
+import MobileScreenShareIcon from "@mui/icons-material/MobileScreenShare";
 import { useAuthStore } from "../hooks/useAuthStore";
 import DataManagement from "./DataManagement";
-import { SubMenuTab } from "./SubMenuTab";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -46,7 +45,7 @@ function a11yProps(index: number) {
   };
 }
 
-export const MenuTab = () => {
+export const SubMenuTab = () => {
   const [value, setValue] = useState(0);
   const { user } = useAuthStore();
 
@@ -76,47 +75,65 @@ export const MenuTab = () => {
         >
           <Tab
             style={{ fontWeight: "bold" }}
-            label="Generador de UTMs"
+            label="Productos"
             {...a11yProps(0)}
-            icon={<InsertLinkIcon />}
+            icon={<BusinessIcon />}
             itemProp="itemListElement"
           />
           <Tab
             style={{ fontWeight: "bold" }}
-            label="Nombramiento de campañas"
+            label="Tipos de Inversión"
             {...a11yProps(1)}
-            icon={<DriveFileRenameOutlineIcon />}
+            icon={<AttachMoneyIcon />}
             itemProp="itemListElement"
           />
           <Tab
             style={{ fontWeight: "bold" }}
-            label="Administración de datos"
+            label="Estrategias"
             {...a11yProps(1)}
-            icon={<PostAddIcon />}
+            icon={<PsychologyIcon />}
             itemProp="itemListElement"
           />
-          {validateAdmin() && (
-            <Tab
-              style={{ fontWeight: "bold" }}
-              label="Creación de usuarios"
-              {...a11yProps(3)}
-              icon={<GroupAddIcon />}
-              itemProp="itemListElement"
-            />
-          )}
+          <Tab
+            style={{ fontWeight: "bold" }}
+            label="Tipos de Canales"
+            {...a11yProps(3)}
+            icon={<GridViewIcon />}
+            itemProp="itemListElement"
+          />
+          <Tab
+            style={{ fontWeight: "bold" }}
+            label="Fuentes de Publicación"
+            {...a11yProps(4)}
+            icon={<MediationIcon />}
+            itemProp="itemListElement"
+          />
+          <Tab
+            style={{ fontWeight: "bold" }}
+            label="Medios"
+            {...a11yProps(5)}
+            icon={<MobileScreenShareIcon />}
+            itemProp="itemListElement"
+          />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Utms />
+        <DataManagement />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <CampainName />
+        <DataManagement />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <SubMenuTab />
+        <DataManagement />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <CreateUsers />
+        <DataManagement />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <DataManagement />
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        <DataManagement />
       </TabPanel>
     </Box>
   );

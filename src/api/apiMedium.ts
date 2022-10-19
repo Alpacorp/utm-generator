@@ -2,18 +2,18 @@ import axios from "axios";
 
 const baseURL = process.env.REACT_APP_URL;
 
-export const apiStrategy = axios.create({
+export const apiMedium = axios.create({
   baseURL: baseURL,
 });
 
-export const getStrategyData = async () => {
-  const { data } = await apiStrategy.get("/strategy/strategy");
-  return data;
-};
+// export const getMediumData = async () => {
+//   const { data } = await apiMedium.get("/medium/medium");
+//   return data;
+// };
 
 // todo add interceptor to handle errors
 
-apiStrategy.interceptors.request.use((config: any) => {
+apiMedium.interceptors.request.use((config: any) => {
   config.headers = {
     ...config.headers,
     "x-token": localStorage.getItem("token") || "",
