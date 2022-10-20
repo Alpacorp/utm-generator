@@ -6,19 +6,6 @@ export const apiBusiness = axios.create({
   baseURL: baseURL,
 });
 
-export const getBusinessLineData = async () => {
-  const { data } = await apiBusiness.get("/businessline/businesslines");
-  return data;
-};
-
-export const updateBusinessLineData = async (businessLine: any) => {
-  const { data } = await apiBusiness.put(
-    `/businessline/${businessLine.id}`,
-    businessLine
-  );
-  return data;
-};
-
 // todo add interceptor to handle errors
 
 apiBusiness.interceptors.request.use((config: any) => {

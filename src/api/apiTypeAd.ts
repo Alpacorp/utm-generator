@@ -6,11 +6,6 @@ export const apiTypeAd = axios.create({
   baseURL: baseURL,
 });
 
-export const getApiBusinessData = async () => {
-  const { data } = await apiTypeAd.get("/businessline/businesslines");
-  return data;
-};
-
 // todo add interceptor to handle errors
 
 apiTypeAd.interceptors.request.use((config: any) => {

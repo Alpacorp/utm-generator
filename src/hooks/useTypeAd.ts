@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import { apiTypeAd } from "../api/apiTypeAd";
 import {
   clearErrorMessageTypeAd,
@@ -8,10 +9,6 @@ import {
 } from "../store";
 
 export const useTypeAd = () => {
-  const { status, typeAd, errorMessage } = useSelector(
-    (state: any) => state.typeAd
-  );
-
   const dispatch = useDispatch();
 
   const typeAdStore = async () => {
@@ -29,7 +26,36 @@ export const useTypeAd = () => {
     }
   };
 
+  const createTypeAd = async ({ name, shortname }: any) => {
+    dispatch(onCheckingTypeAd());
+
+    try {
+      await apiTypeAd.post("/typead/new", {
+        name,
+        shortname,
+      });
+      setTimeout(() => {
+        Swal.fire({
+          title: "Tipo de Inversión creado correctamente",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+      }, 20);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(onGetTypeAdError(error.response.data?.msg || "TypeAd error"));
+      setTimeout(() => {
+        dispatch(clearErrorMessageTypeAd());
+      }, 20);
+    }
+  };
+
   return {
     typeAdStore,
+    createTypeAd,
   };
 };

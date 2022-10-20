@@ -11,6 +11,11 @@ import MediationIcon from "@mui/icons-material/Mediation";
 import MobileScreenShareIcon from "@mui/icons-material/MobileScreenShare";
 import { useAuthStore } from "../hooks/useAuthStore";
 import DataManagement from "./DataManagement";
+import { useBusinessLine } from "../hooks/useBusinessLine";
+import { useTypeAd } from "../hooks/useTypeAd";
+import { useStrategy } from "../hooks/useStrategy";
+import { useSourceMedia } from "../hooks/useSourceMedia";
+import { useMedium } from "../hooks/useMedium";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -60,6 +65,12 @@ export const SubMenuTab = () => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const { createBusinessLine, businessLineStore } = useBusinessLine();
+  const { createTypeAd, typeAdStore } = useTypeAd();
+  const { createStrategy, strategyStore } = useStrategy();
+  const { createSourceMedia, sourceMediaStore } = useSourceMedia();
+  const { createMedium, mediumStore } = useMedium();
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -118,22 +129,47 @@ export const SubMenuTab = () => {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <DataManagement />
+        <DataManagement
+          type={1}
+          title={"Producto"}
+          createData={createBusinessLine}
+          storeData={businessLineStore}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <DataManagement />
+        <DataManagement
+          type={1}
+          title={"Tipo de Inversión"}
+          createData={createTypeAd}
+          storeData={typeAdStore}
+        />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <DataManagement />
+        <DataManagement
+          type={1}
+          title={"Estrategia"}
+          createData={createStrategy}
+          storeData={strategyStore}
+        />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <DataManagement />
+        <DataManagement type={2} title={"Tipo de Canal"} />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <DataManagement />
+        <DataManagement
+          type={3}
+          title={"Fuente de Publicación"}
+          createData={createSourceMedia}
+          storeData={sourceMediaStore}
+        />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <DataManagement />
+        <DataManagement
+          type={3}
+          title={"Medio"}
+          createData={createMedium}
+          storeData={mediumStore}
+        />
       </TabPanel>
     </Box>
   );
