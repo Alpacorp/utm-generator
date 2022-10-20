@@ -7,15 +7,21 @@ import NewDataForm from "./NewDataForm";
 interface PropsDataManagement {
   type?: number;
   title?: string;
-  createData?: any;
   storeData?: any;
+  createData?: any;
+  updateData?: any;
+  deleteData?: any;
+  getStoreData?: any;
 }
 
 const DataManagement = ({
   type,
   title,
-  createData,
   storeData,
+  createData,
+  updateData,
+  deleteData,
+  getStoreData,
 }: PropsDataManagement) => {
   const [rowId, setRowId] = useState(null);
   const [data, setData] = useState([]);
@@ -43,7 +49,18 @@ const DataManagement = ({
         type: "actions",
         width: 150,
         renderCell: (params: any) => {
-          return <Actions {...{ params, rowId, setRowId }} />;
+          return (
+            <Actions
+              {...{
+                params,
+                rowId,
+                setRowId,
+                updateData,
+                storeData,
+                deleteData,
+              }}
+            />
+          );
         },
       },
     ],
@@ -53,8 +70,8 @@ const DataManagement = ({
   const { businessLine } = useSelector((state: any) => state.businessLine);
 
   useMemo(() => {
-    setData(businessLine?.businessLines ? businessLine.businessLines : []);
-  }, [businessLine.businessLines]);
+    setData(getStoreData ? getStoreData : []);
+  }, [getStoreData]);
 
   return (
     <>
@@ -62,8 +79,8 @@ const DataManagement = ({
         <NewDataForm
           type={type}
           title={title}
-          createData={createData}
           storeData={storeData}
+          createData={createData}
         />
         <DataGrid
           rows={data}

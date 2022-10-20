@@ -54,8 +54,38 @@ export const useTypeAd = () => {
     }
   };
 
+  const updateTypeAd = async (id: string, data: any) => {
+    dispatch(onCheckingTypeAd());
+
+    try {
+      await apiTypeAd.put(`/typead/${id}`, data);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(onGetTypeAdError(error.response.data?.msg || "TypeAd error"));
+      setTimeout(() => {
+        dispatch(clearErrorMessageTypeAd());
+      }, 20);
+    }
+  };
+
+  const deleteTypeAd = async (id: string) => {
+    dispatch(onCheckingTypeAd());
+
+    try {
+      await apiTypeAd.delete(`/typead/${id}`);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(onGetTypeAdError(error.response.data?.msg || "TypeAd error"));
+      setTimeout(() => {
+        dispatch(clearErrorMessageTypeAd());
+      }, 20);
+    }
+  };
+
   return {
     typeAdStore,
     createTypeAd,
+    updateTypeAd,
+    deleteTypeAd,
   };
 };

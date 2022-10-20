@@ -5,15 +5,15 @@ import DataTypeForm3 from "./DataTypeForm3";
 interface PropsNewDataForm {
   type?: number;
   title?: string;
-  createData?: any;
   storeData?: any;
+  createData?: any;
 }
 
 const NewDataForm = ({
   type,
   title,
-  createData,
   storeData,
+  createData,
 }: PropsNewDataForm) => {
   switch (type) {
     case 1:
