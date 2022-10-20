@@ -6,11 +6,6 @@ export const apiMedium = axios.create({
   baseURL: baseURL,
 });
 
-// export const getMediumData = async () => {
-//   const { data } = await apiMedium.get("/medium/medium");
-//   return data;
-// };
-
 // todo add interceptor to handle errors
 
 apiMedium.interceptors.request.use((config: any) => {

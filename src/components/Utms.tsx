@@ -3,14 +3,7 @@ import MenuItem from "@mui/material/MenuItem";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { Toaster, toast } from "react-hot-toast";
-
-// import Business from "../data/businessLine.json";
-import Channel from "../data/channelType.json";
-import TypeAd from "../data/typeAd.json";
-import SourceMedia from "../data/sourceMedia.json";
-import Strategy from "../data/strategy.json";
 import Medium from "../data/medium.json";
-
 import { useForm } from "../hooks/useForm";
 import { transformText } from "../utils/transformText";
 import "./Utms.css";
@@ -185,7 +178,7 @@ const Utms = () => {
               <MenuItem value="">Selecciona</MenuItem>
               {businessLineData?.businessLines?.map((value: any) => (
                 <MenuItem key={value._id} value={value.shortname}>
-                  {value.name + " - " + value.shortname + " - " + value._id}
+                  {value.name + " - " + value.shortname}
                 </MenuItem>
               ))}
             </TextField>
@@ -205,7 +198,7 @@ const Utms = () => {
               <MenuItem value="">Selecciona</MenuItem>
               {typeAdData?.typeAd?.map((value: any) => (
                 <MenuItem key={value._id} value={value.shortname}>
-                  {value.name + " - " + value.shortname + " - " + value._id}
+                  {value.name + " - " + value.shortname}
                 </MenuItem>
               ))}
             </TextField>
@@ -225,7 +218,7 @@ const Utms = () => {
               <MenuItem value="">Selecciona</MenuItem>
               {strategyData?.strategy?.map((value: any, index: number) => (
                 <MenuItem key={value._id} value={value.shortname}>
-                  {value.name + " - " + value.shortname + " - " + value._id}
+                  {value.name + " - " + value.shortname}
                 </MenuItem>
               ))}
             </TextField>
@@ -246,7 +239,11 @@ const Utms = () => {
               <MenuItem value="">Selecciona</MenuItem>
               {channelTypeData?.channels?.map((value: any, index: number) => (
                 <MenuItem key={value._id} value={value.idchanneltype}>
-                  {value.name + " - " + value._id + " - " + value.idchanneltype}
+                  {value.name +
+                    " - " +
+                    value.shortname +
+                    " - " +
+                    value.idchanneltype}
                 </MenuItem>
               ))}
             </TextField>
@@ -268,7 +265,7 @@ const Utms = () => {
               <MenuItem value="">Selecciona</MenuItem>
               {sourceMediaFiltered?.map((value: any, index: number) => (
                 <MenuItem key={value._id} value={value.name}>
-                  {value.name + " - " + value._id + " - " + value.idchanneltype}
+                  {value.name + " - " + value.idchanneltype}
                 </MenuItem>
               ))}
             </TextField>
@@ -289,7 +286,7 @@ const Utms = () => {
               <MenuItem value="">Selecciona</MenuItem>
               {mediumFiltered?.map((value: any, index: number) => (
                 <MenuItem key={value._id} value={value.name}>
-                  {value.name + " - " + value._id + " - " + value.idchanneltype}
+                  {value.name + " - " + value.idchanneltype}
                 </MenuItem>
               ))}
             </TextField>

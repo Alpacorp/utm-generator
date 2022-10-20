@@ -6,11 +6,6 @@ export const apiStrategy = axios.create({
   baseURL: baseURL,
 });
 
-export const getStrategyData = async () => {
-  const { data } = await apiStrategy.get("/strategy/strategy");
-  return data;
-};
-
 // todo add interceptor to handle errors
 
 apiStrategy.interceptors.request.use((config: any) => {

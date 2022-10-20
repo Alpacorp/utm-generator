@@ -6,12 +6,6 @@ export const apiChannelType = axios.create({
   baseURL: baseURL,
 });
 
-export const getChannelTypeData = async () => {
-  const { data } = await apiChannelType.get("/channeltype/channeltype");
-  console.log("data channel type", data);
-  return data;
-};
-
 // todo add interceptor to handle errors
 
 apiChannelType.interceptors.request.use((config: any) => {

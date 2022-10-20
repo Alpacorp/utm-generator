@@ -2,14 +2,28 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
 import Actions from "./Actions";
 import { useState, useMemo } from "react";
-import { MenuItem, TextField } from "@mui/material";
+import NewDataForm from "./NewDataForm";
 
-const DataManagement = () => {
+interface PropsDataManagement {
+  type?: number;
+  title?: string;
+  createData?: any;
+  storeData?: any;
+}
+
+const DataManagement = ({
+  type,
+  title,
+  createData,
+  storeData,
+}: PropsDataManagement) => {
   const [rowId, setRowId] = useState(null);
+  const [data, setData] = useState([]);
 
   const columns = useMemo(
     () => [
-      { field: "_id", headerName: "id", width: 250 },
+      { field: "_id", headerName: "id", width: 150 },
+      { field: "date", headerName: "created date", width: 250 },
       { field: "name", headerName: "name", width: 150, editable: true },
       {
         field: "shortname",
@@ -38,30 +52,25 @@ const DataManagement = () => {
 
   const { businessLine } = useSelector((state: any) => state.businessLine);
 
-  let dataRows = 1;
-
-  const getDataRows = () => {
-    switch (dataRows) {
-      case 1:
-        console.log("caso 1");
-        return businessLine?.businessLines;
-        break;
-      default:
-        break;
-    }
-  };
-
-  getDataRows();
+  useMemo(() => {
+    setData(businessLine?.businessLines ? businessLine.businessLines : []);
+  }, [businessLine.businessLines]);
 
   return (
     <>
       <div style={{ height: 400, width: "100%" }}>
+        <NewDataForm
+          type={type}
+          title={title}
+          createData={createData}
+          storeData={storeData}
+        />
         <DataGrid
-          rows={businessLine?.businessLines ? businessLine.businessLines : []}
+          rows={data}
           columns={columns}
-          pageSize={5}
-          getRowId={(row) => row._id}
-          rowsPerPageOptions={[5]}
+          pageSize={10}
+          getRowId={(row: any) => row._id}
+          rowsPerPageOptions={[5, 10, 20, 50]}
           components={{
             Toolbar: GridToolbar,
           }}

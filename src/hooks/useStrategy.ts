@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import { apiStrategy } from "../api/apiStrategy";
 import {
   clearErrorMessageStrategy,
@@ -8,10 +9,6 @@ import {
 } from "../store";
 
 export const useStrategy = () => {
-  const { status, strategy, errorMessage } = useSelector(
-    (state: any) => state.strategy
-  );
-
   const dispatch = useDispatch();
 
   const strategyStore = async () => {
@@ -31,7 +28,38 @@ export const useStrategy = () => {
     }
   };
 
+  const createStrategy = async ({ name, shortname }: any) => {
+    dispatch(onCheckingStrategy());
+
+    try {
+      await apiStrategy.post("/strategy/new", {
+        name,
+        shortname,
+      });
+      setTimeout(() => {
+        Swal.fire({
+          title: "Estrategia creada correctamente",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+      }, 20);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(
+        onGetStrategyError(error.response.data?.msg || "Strategy error")
+      );
+      setTimeout(() => {
+        dispatch(clearErrorMessageStrategy());
+      }, 20);
+    }
+  };
+
   return {
     strategyStore,
+    createStrategy,
   };
 };
