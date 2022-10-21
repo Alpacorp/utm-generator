@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { apiMedium } from "../api/apiMedium";
 import {
@@ -48,6 +48,52 @@ export const useMedium = () => {
     } catch (error: any) {
       console.log("error", error);
       dispatch(onGetMediumError(error.response.data?.msg || "TypeAd error"));
+      Swal.fire({
+        title: error.response.data?.msg || "Strategy error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      setTimeout(() => {
+        dispatch(clearErrorMessageMedium());
+      }, 20);
+    }
+  };
+
+  const updateMedium = async (id: string, data: any) => {
+    dispatch(onCheckingMedium());
+
+    try {
+      await apiMedium.put(`/medium/${id}`, data);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(onGetMediumError(error.response.data?.msg || "TypeAd error"));
+      Swal.fire({
+        title: error.response.data?.msg || "Strategy error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      setTimeout(() => {
+        dispatch(clearErrorMessageMedium());
+      }, 20);
+    }
+  };
+
+  const deleteMedium = async (id: string) => {
+    dispatch(onCheckingMedium());
+
+    try {
+      await apiMedium.delete(`/medium/${id}`);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(onGetMediumError(error.response.data?.msg || "TypeAd error"));
       setTimeout(() => {
         dispatch(clearErrorMessageMedium());
       }, 20);
@@ -57,5 +103,7 @@ export const useMedium = () => {
   return {
     mediumStore,
     createMedium,
+    updateMedium,
+    deleteMedium,
   };
 };

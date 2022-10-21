@@ -1,29 +1,30 @@
+import { useState } from "react";
 import { Check, Save } from "@mui/icons-material";
 import { Box, CircularProgress, Fab } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { green, red } from "@mui/material/colors";
-import { useState } from "react";
-import { useBusinessLine } from "../hooks/useBusinessLine";
 
-const Actions = ({ params, rowId, setRowId }: any) => {
+const Actions = ({
+  params,
+  rowId,
+  setRowId,
+  updateData,
+  storeData,
+  deleteData,
+}: any) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const {
-    updateBusinessLineStore,
-    businessLineStore,
-    deleteBusinessLineStore,
-  } = useBusinessLine();
 
   const handleUpdate = async () => {
     setLoading(true);
     setTimeout(async () => {
       const { name, shortname, idchanneltype } = params.row;
-      await updateBusinessLineStore(params.id, {
+      await updateData(params.id, {
         name,
         shortname,
         idchanneltype,
       });
-      businessLineStore();
+      storeData();
       setRowId(null);
       setLoading(false);
     }, 1500);
@@ -33,8 +34,8 @@ const Actions = ({ params, rowId, setRowId }: any) => {
   const handleDelete = async () => {
     setLoading(true);
     setTimeout(async () => {
-      await deleteBusinessLineStore(params.id);
-      businessLineStore();
+      await deleteData(params.id);
+      storeData();
       setRowId(null);
       setLoading(false);
     }, 1500);

@@ -1,21 +1,21 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import BusinessIcon from "@mui/icons-material/Business";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import GridViewIcon from "@mui/icons-material/GridView";
 import MediationIcon from "@mui/icons-material/Mediation";
 import MobileScreenShareIcon from "@mui/icons-material/MobileScreenShare";
-import { useAuthStore } from "../hooks/useAuthStore";
 import DataManagement from "./DataManagement";
 import { useBusinessLine } from "../hooks/useBusinessLine";
 import { useTypeAd } from "../hooks/useTypeAd";
 import { useStrategy } from "../hooks/useStrategy";
 import { useSourceMedia } from "../hooks/useSourceMedia";
 import { useMedium } from "../hooks/useMedium";
+import { useChannelType } from "../hooks/useChannelType";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -52,25 +52,41 @@ function a11yProps(index: number) {
 
 export const SubMenuTab = () => {
   const [value, setValue] = useState(0);
-  const { user } = useAuthStore();
-
-  const validateAdmin = () => {
-    if (user?.role === "admin") {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
-  const { createBusinessLine, businessLineStore } = useBusinessLine();
-  const { createTypeAd, typeAdStore } = useTypeAd();
-  const { createStrategy, strategyStore } = useStrategy();
-  const { createSourceMedia, sourceMediaStore } = useSourceMedia();
-  const { createMedium, mediumStore } = useMedium();
+  const {
+    createBusinessLine,
+    businessLineStore,
+    updateBusinessLineStore,
+    deleteBusinessLineStore,
+  } = useBusinessLine();
+
+  const { createTypeAd, typeAdStore, updateTypeAd, deleteTypeAd } = useTypeAd();
+
+  const { createStrategy, strategyStore, updateStrategy, deleteStrategy } =
+    useStrategy();
+
+  const { channelTypeStore, updateChannelType, deleteChannelType } =
+    useChannelType();
+
+  const {
+    createSourceMedia,
+    sourceMediaStore,
+    updateSourceMedia,
+    deleteSourceMedia,
+  } = useSourceMedia();
+
+  const { createMedium, mediumStore, updateMedium, deleteMedium } = useMedium();
+
+  const { businessLine } = useSelector((state: any) => state.businessLine);
+  const { typeAd } = useSelector((state: any) => state.typeAd);
+  const { strategy } = useSelector((state: any) => state.strategy);
+  const { channelType } = useSelector((state: any) => state.channelType);
+  const { sourceMedia } = useSelector((state: any) => state.sourceMedia);
+  const { medium } = useSelector((state: any) => state.medium);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -81,6 +97,8 @@ export const SubMenuTab = () => {
           aria-label="basic tabs example"
           variant="scrollable"
           scrollButtons="auto"
+          textColor={"secondary"}
+          indicatorColor={"secondary"}
           itemScope
           itemType="http://schema.org/ItemList"
         >
@@ -132,16 +150,22 @@ export const SubMenuTab = () => {
         <DataManagement
           type={1}
           title={"Producto"}
-          createData={createBusinessLine}
           storeData={businessLineStore}
+          createData={createBusinessLine}
+          updateData={updateBusinessLineStore}
+          deleteData={deleteBusinessLineStore}
+          getStoreData={businessLine?.businessLines}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <DataManagement
           type={1}
           title={"Tipo de Inversión"}
-          createData={createTypeAd}
           storeData={typeAdStore}
+          createData={createTypeAd}
+          updateData={updateTypeAd}
+          deleteData={deleteTypeAd}
+          getStoreData={typeAd?.typeAd}
         />
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -150,10 +174,20 @@ export const SubMenuTab = () => {
           title={"Estrategia"}
           createData={createStrategy}
           storeData={strategyStore}
+          updateData={updateStrategy}
+          deleteData={deleteStrategy}
+          getStoreData={strategy?.strategy}
         />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <DataManagement type={2} title={"Tipo de Canal"} />
+        <DataManagement
+          type={2}
+          title={"Tipo de Canal"}
+          storeData={channelTypeStore}
+          updateData={updateChannelType}
+          deleteData={deleteChannelType}
+          getStoreData={channelType?.channels}
+        />
       </TabPanel>
       <TabPanel value={value} index={4}>
         <DataManagement
@@ -161,6 +195,9 @@ export const SubMenuTab = () => {
           title={"Fuente de Publicación"}
           createData={createSourceMedia}
           storeData={sourceMediaStore}
+          updateData={updateSourceMedia}
+          deleteData={deleteSourceMedia}
+          getStoreData={sourceMedia?.source}
         />
       </TabPanel>
       <TabPanel value={value} index={5}>
@@ -169,6 +206,9 @@ export const SubMenuTab = () => {
           title={"Medio"}
           createData={createMedium}
           storeData={mediumStore}
+          updateData={updateMedium}
+          deleteData={deleteMedium}
+          getStoreData={medium?.mediums}
         />
       </TabPanel>
     </Box>

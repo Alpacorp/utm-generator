@@ -1,30 +1,35 @@
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useSelector } from "react-redux";
-import Actions from "./Actions";
 import { useState, useMemo } from "react";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import Actions from "./Actions";
 import NewDataForm from "./NewDataForm";
 
 interface PropsDataManagement {
   type?: number;
   title?: string;
-  createData?: any;
   storeData?: any;
+  createData?: any;
+  updateData?: any;
+  deleteData?: any;
+  getStoreData?: any;
 }
 
 const DataManagement = ({
   type,
   title,
-  createData,
   storeData,
+  createData,
+  updateData,
+  deleteData,
+  getStoreData,
 }: PropsDataManagement) => {
   const [rowId, setRowId] = useState(null);
   const [data, setData] = useState([]);
 
   const columns = useMemo(
     () => [
-      { field: "_id", headerName: "id", width: 150 },
+      { field: "_id", headerName: "id", width: 250 },
       { field: "date", headerName: "created date", width: 250 },
-      { field: "name", headerName: "name", width: 150, editable: true },
+      { field: "name", headerName: "name", width: 250, editable: true },
       {
         field: "shortname",
         headerName: "shortname",
@@ -41,20 +46,30 @@ const DataManagement = ({
         field: "actions",
         headerName: "actions",
         type: "actions",
-        width: 150,
+        width: 200,
         renderCell: (params: any) => {
-          return <Actions {...{ params, rowId, setRowId }} />;
+          return (
+            <Actions
+              {...{
+                params,
+                rowId,
+                setRowId,
+                updateData,
+                storeData,
+                deleteData,
+              }}
+            />
+          );
         },
       },
     ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [rowId]
   );
 
-  const { businessLine } = useSelector((state: any) => state.businessLine);
-
   useMemo(() => {
-    setData(businessLine?.businessLines ? businessLine.businessLines : []);
-  }, [businessLine.businessLines]);
+    setData(getStoreData ? getStoreData : []);
+  }, [getStoreData]);
 
   return (
     <>
@@ -62,8 +77,8 @@ const DataManagement = ({
         <NewDataForm
           type={type}
           title={title}
-          createData={createData}
           storeData={storeData}
+          createData={createData}
         />
         <DataGrid
           rows={data}

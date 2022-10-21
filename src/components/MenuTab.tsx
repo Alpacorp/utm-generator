@@ -10,7 +10,6 @@ import Utms from "./Utms";
 import CampainName from "./CampainName";
 import CreateUsers from "./CreateUsers";
 import { useAuthStore } from "../hooks/useAuthStore";
-import DataManagement from "./DataManagement";
 import { SubMenuTab } from "./SubMenuTab";
 
 interface TabPanelProps {

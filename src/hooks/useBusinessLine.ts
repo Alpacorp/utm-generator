@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { apiBusiness } from "../api/apiBusiness";
 import {
@@ -52,6 +52,15 @@ export const useBusinessLine = () => {
       dispatch(
         onGetbusinessError(error.response.data?.msg || "BusinessLine error")
       );
+      Swal.fire({
+        title: error.response.data?.msg || "BusinessLine error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
       setTimeout(() => {
         dispatch(clearErrorMessagebusiness());
       }, 20);
@@ -68,6 +77,15 @@ export const useBusinessLine = () => {
       dispatch(
         onGetbusinessError(error.response.data?.msg || "BusinessLine error")
       );
+      Swal.fire({
+        title: error.response.data?.msg || "BusinessLine error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
       setTimeout(() => {
         dispatch(clearErrorMessagebusiness());
       }, 20);

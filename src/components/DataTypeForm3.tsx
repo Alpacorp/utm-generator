@@ -1,5 +1,5 @@
+import { useSelector } from "react-redux";
 import { Button, Grid, MenuItem, TextField, Typography } from "@mui/material";
-import { useBusinessLine } from "../hooks/useBusinessLine";
 import { useForm2 } from "../hooks/useForm2";
 
 const addNewData = {
@@ -11,20 +11,25 @@ interface PropsDataForm3 {
   title?: string;
   createData?: any;
   storeData?: any;
+  getStoreData?: any;
 }
 
 const DataTypeForm3 = ({ title, createData, storeData }: PropsDataForm3) => {
   const { addName, addIdChannelType, onInputChange, onResetForm } =
     useForm2(addNewData);
 
-  // const { createBusinessLine, businessLineStore } = useBusinessLine();
-
   const handleNewData = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     createData({ name: addName, idchanneltype: addIdChannelType });
-    storeData();
+    setTimeout(() => {
+      storeData();
+    }, 1000);
     onResetForm();
   };
+
+  const { channelType: channelTypeData } = useSelector(
+    (state: any) => state.channelType
+  );
 
   return (
     <div style={{ width: "100%" }}>
@@ -56,12 +61,19 @@ const DataTypeForm3 = ({ title, createData, storeData }: PropsDataForm3) => {
           required
           type="number"
           style={{ width: "100%", marginBottom: "10px" }}
-          helperText="Digital el nombre corto"
+          helperText="Selecciona el tipo de canal"
           select
         >
-          <MenuItem value="1">1</MenuItem>
-          <MenuItem value="2">2</MenuItem>
-          <MenuItem value="3">3</MenuItem>
+          <MenuItem value="">Selecciona</MenuItem>
+          {channelTypeData?.channels?.map((value: any, index: number) => (
+            <MenuItem key={value._id} value={value.idchanneltype}>
+              {value.name +
+                " - " +
+                value.shortname +
+                " - " +
+                value.idchanneltype}
+            </MenuItem>
+          ))}
         </TextField>
         <Grid style={{ margin: "10px 0 30px 0" }}>
           <Button

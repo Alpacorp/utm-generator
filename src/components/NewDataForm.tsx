@@ -5,15 +5,16 @@ import DataTypeForm3 from "./DataTypeForm3";
 interface PropsNewDataForm {
   type?: number;
   title?: string;
-  createData?: any;
   storeData?: any;
+  createData?: any;
+  getStoreData?: any;
 }
 
 const NewDataForm = ({
   type,
   title,
-  createData,
   storeData,
+  createData,
 }: PropsNewDataForm) => {
   switch (type) {
     case 1:
@@ -26,14 +27,12 @@ const NewDataForm = ({
           />
         </>
       );
-      break;
     case 2:
       return (
         <>
           <DataTypeForm2 title={title} />
         </>
       );
-      break;
     case 3:
       return (
         <>
@@ -44,7 +43,6 @@ const NewDataForm = ({
           />
         </>
       );
-      break;
     default:
       break;
   }

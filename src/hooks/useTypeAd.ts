@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { apiTypeAd } from "../api/apiTypeAd";
 import {
@@ -48,6 +48,52 @@ export const useTypeAd = () => {
     } catch (error: any) {
       console.log("error", error);
       dispatch(onGetTypeAdError(error.response.data?.msg || "TypeAd error"));
+      Swal.fire({
+        title: error.response.data?.msg || "TypeAd error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      setTimeout(() => {
+        dispatch(clearErrorMessageTypeAd());
+      }, 20);
+    }
+  };
+
+  const updateTypeAd = async (id: string, data: any) => {
+    dispatch(onCheckingTypeAd());
+
+    try {
+      await apiTypeAd.put(`/typead/${id}`, data);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(onGetTypeAdError(error.response.data?.msg || "TypeAd error"));
+      Swal.fire({
+        title: error.response.data?.msg || "TypeAd error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      setTimeout(() => {
+        dispatch(clearErrorMessageTypeAd());
+      }, 20);
+    }
+  };
+
+  const deleteTypeAd = async (id: string) => {
+    dispatch(onCheckingTypeAd());
+
+    try {
+      await apiTypeAd.delete(`/typead/${id}`);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(onGetTypeAdError(error.response.data?.msg || "TypeAd error"));
       setTimeout(() => {
         dispatch(clearErrorMessageTypeAd());
       }, 20);
@@ -57,5 +103,7 @@ export const useTypeAd = () => {
   return {
     typeAdStore,
     createTypeAd,
+    updateTypeAd,
+    deleteTypeAd,
   };
 };
