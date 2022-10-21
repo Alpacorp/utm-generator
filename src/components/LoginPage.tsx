@@ -48,7 +48,7 @@ export const LoginPage = () => {
         <form onSubmit={loginSubmit}>
           <Grid style={{ margin: "10px 0" }}>
             <TextField
-              type="text"
+              type="email"
               placeholder="Correo"
               name="loginEmail"
               value={loginEmail}
