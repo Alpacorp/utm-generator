@@ -7,6 +7,7 @@ import {
   channelTypeSlice,
   sourceMediaSlice,
   mediumSlice,
+  usersSlice,
 } from "./";
 
 export const store = configureStore({
@@ -18,5 +19,6 @@ export const store = configureStore({
     channelType: channelTypeSlice.reducer,
     sourceMedia: sourceMediaSlice.reducer,
     medium: mediumSlice.reducer,
+    users: usersSlice.reducer,
   },
 });

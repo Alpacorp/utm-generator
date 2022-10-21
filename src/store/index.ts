@@ -5,5 +5,6 @@ export * from "./strategy/strategySlice";
 export * from "./channelType/channelTypeSlice";
 export * from "./sourceMedia/sourceMediaSlice";
 export * from "./medium/mediumSlice";
+export * from "./users/usersSlice";
 
 export * from "./store";
