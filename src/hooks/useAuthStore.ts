@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import authApi from "../api/apiAuth";
 import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store";
-import Swal from "sweetalert2";
 
 export const useAuthStore = () => {
   const { status, user, errorMessage } = useSelector(

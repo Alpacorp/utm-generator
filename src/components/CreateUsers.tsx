@@ -1,7 +1,12 @@
+import { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { Grid, Typography, TextField, Button, MenuItem } from "@mui/material";
 import { useAuthStore } from "../hooks/useAuthStore";
 import { useForm2 } from "../hooks/useForm2";
-import { Grid, Typography, TextField, Button, MenuItem } from "@mui/material";
+import Actions from "./Actions";
+import { useUsers } from "../hooks/useUsers";
 
 const registerFormFields = {
   registerName: "",
@@ -12,7 +17,11 @@ const registerFormFields = {
 };
 
 const CreateUsers = () => {
-  const { startRegister } = useAuthStore();
+  const { user } = useAuthStore();
+  const { createUser, usersStore, updateUser, deleteUser } = useUsers();
+
+  const { user: userData } = useSelector((state: any) => state.users);
+
   const {
     registerName,
     registerEmail,
@@ -23,6 +32,13 @@ const CreateUsers = () => {
     onResetForm: onRegisterResetForm,
   } = useForm2(registerFormFields);
 
+  useEffect(() => {
+    if (user?.role === "admin") {
+      usersStore();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
   const registerSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -31,7 +47,7 @@ const CreateUsers = () => {
       return;
     }
 
-    startRegister({
+    createUser({
       name: registerName,
       email: registerEmail,
       role: registerRole,
@@ -39,9 +55,64 @@ const CreateUsers = () => {
     });
 
     setTimeout(() => {
+      usersStore();
+    }, 1000);
+
+    setTimeout(() => {
       onRegisterResetForm();
     }, 50);
   };
+
+  const [rowId, setRowId] = useState(null);
+  const [data, setData] = useState([]);
+
+  const columns = useMemo(
+    () => [
+      { field: "_id", headerName: "id", width: 250 },
+      { field: "date", headerName: "created date", width: 250 },
+      { field: "name", headerName: "name", width: 250, editable: true },
+      {
+        field: "email",
+        headerName: "email",
+        width: 350,
+        editable: true,
+      },
+      {
+        field: "role",
+        headerName: "role",
+        width: 100,
+        editable: true,
+        type: "singleSelect",
+        valueOptions: ["admin", "user"],
+      },
+      {
+        field: "actions",
+        headerName: "actions",
+        type: "actions",
+        width: 200,
+        renderCell: (params: any) => {
+          return (
+            <Actions
+              {...{
+                params,
+                rowId,
+                setRowId,
+                updateData: updateUser,
+                storeData: usersStore,
+                deleteData: deleteUser,
+              }}
+            />
+          );
+        },
+      },
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [rowId]
+  );
+
+  useMemo(() => {
+    setData(userData.users ? userData.users : []);
+  }, [userData]);
 
   return (
     <>
@@ -93,7 +164,6 @@ const CreateUsers = () => {
               label="Rol"
               select
               defaultValue={registerRole}
-              // style={{ maxWidth: "210px", width: "100%" }}
               fullWidth
             >
               <MenuItem value="admin">Administrador</MenuItem>
@@ -149,6 +219,25 @@ const CreateUsers = () => {
           </Grid>
         </form>
       </Grid>
+      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={data}
+          columns={columns}
+          pageSize={10}
+          getRowId={(row: any) => row._id}
+          rowsPerPageOptions={[5, 10, 20, 50]}
+          components={{
+            Toolbar: GridToolbar,
+          }}
+          getRowSpacing={(params: any) => ({
+            top: params.isFirstVisible ? 0 : 5,
+            bottom: params.isLastVisible ? 0 : 5,
+          })}
+          onCellEditCommit={(params: any) => {
+            setRowId(params.id);
+          }}
+        />
+      </div>
     </>
   );
 };

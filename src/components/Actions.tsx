@@ -18,9 +18,11 @@ const Actions = ({
   const handleUpdate = async () => {
     setLoading(true);
     setTimeout(async () => {
-      const { name, shortname, idchanneltype } = params.row;
+      const { name, email, role, shortname, idchanneltype } = params.row;
       await updateData(params.id, {
         name,
+        email,
+        role,
         shortname,
         idchanneltype,
       });
