@@ -1,34 +1,18 @@
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { Toaster, toast } from "react-hot-toast";
-import Medium from "../data/medium.json";
 import { useForm } from "../hooks/useForm";
 import { transformText } from "../utils/transformText";
 import "./Utms.css";
-import { useSelector } from "react-redux";
 import { useBusinessLine } from "../hooks/useBusinessLine";
 import { useTypeAd } from "../hooks/useTypeAd";
 import { useStrategy } from "../hooks/useStrategy";
 import { useChannelType } from "../hooks/useChannelType";
 import { useSourceMedia } from "../hooks/useSourceMedia";
 import { useMedium } from "../hooks/useMedium";
-
-const { mediumData } = Medium;
-
-const utmFormFields = {
-  businessLine: "",
-  channelType: "",
-  typeAd: "",
-  sourceMedia: "",
-  strategy: "",
-  medium: "",
-  campaign: "",
-  content: "",
-  term: "",
-  utm: "",
-};
 
 const Utms = () => {
   const [finalUrl, setFinalUrl] = useState("");
@@ -104,6 +88,7 @@ const Utms = () => {
     channelTypeStore();
     sourceMediaStore();
     mediumStore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -234,7 +219,6 @@ const Utms = () => {
               onChange={handleInputChange}
               helperText="Selecciona el tipo de canal"
               required
-              defaultValue=""
             >
               <MenuItem value="">Selecciona</MenuItem>
               {channelTypeData?.channels?.map((value: any, index: number) => (
@@ -259,7 +243,6 @@ const Utms = () => {
               onChange={handleInputChange}
               helperText="Selecciona la fuente de publicación"
               required
-              defaultValue=""
               disabled={channelType === "" ? true : false}
             >
               <MenuItem value="">Selecciona</MenuItem>

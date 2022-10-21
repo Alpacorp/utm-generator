@@ -1,5 +1,4 @@
-import { Button, Grid, MenuItem, TextField, Typography } from "@mui/material";
-import { useBusinessLine } from "../hooks/useBusinessLine";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useChannelType } from "../hooks/useChannelType";
 import { useForm2 } from "../hooks/useForm2";
 
@@ -31,7 +30,9 @@ const DataTypeForm2 = ({ title }: PropsDataForm2) => {
       shortname: addShortName,
       idchanneltype: addIdChannelType,
     });
-    channelTypeStore();
+    setTimeout(() => {
+      channelTypeStore();
+    }, 1000);
     onResetForm();
   };
 
@@ -65,7 +66,7 @@ const DataTypeForm2 = ({ title }: PropsDataForm2) => {
           required
           type="text"
           style={{ width: "100%", marginBottom: "10px" }}
-          helperText="Digital el nombre corto"
+          helperText="Digital el nombre corto el cual debe ser único"
         />
         <TextField
           id="addIdChannelType"
@@ -79,13 +80,8 @@ const DataTypeForm2 = ({ title }: PropsDataForm2) => {
           required
           type="number"
           style={{ width: "100%", marginBottom: "10px" }}
-          helperText="Digital el nombre corto"
-          select
-        >
-          <MenuItem value="1">1</MenuItem>
-          <MenuItem value="2">2</MenuItem>
-          <MenuItem value="3">3</MenuItem>
-        </TextField>
+          helperText="Digital el número de tipo de canal"
+        />
         <Grid style={{ margin: "10px 0 30px 0" }}>
           <Button
             type="submit"

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { apiStrategy } from "../api/apiStrategy";
 import {
@@ -52,6 +52,56 @@ export const useStrategy = () => {
       dispatch(
         onGetStrategyError(error.response.data?.msg || "Strategy error")
       );
+      Swal.fire({
+        title: error.response.data?.msg || "Strategy error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      setTimeout(() => {
+        dispatch(clearErrorMessageStrategy());
+      }, 20);
+    }
+  };
+
+  const updateStrategy = async (id: string, data: any) => {
+    dispatch(onCheckingStrategy());
+
+    try {
+      await apiStrategy.put(`/strategy/${id}`, data);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(
+        onGetStrategyError(error.response.data?.msg || "Strategy error")
+      );
+      Swal.fire({
+        title: error.response.data?.msg || "Strategy error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      setTimeout(() => {
+        dispatch(clearErrorMessageStrategy());
+      }, 20);
+    }
+  };
+
+  const deleteStrategy = async (id: string) => {
+    dispatch(onCheckingStrategy());
+
+    try {
+      await apiStrategy.delete(`/strategy/${id}`);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(
+        onGetStrategyError(error.response.data?.msg || "Strategy error")
+      );
       setTimeout(() => {
         dispatch(clearErrorMessageStrategy());
       }, 20);
@@ -61,5 +111,7 @@ export const useStrategy = () => {
   return {
     strategyStore,
     createStrategy,
+    updateStrategy,
+    deleteStrategy,
   };
 };

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { apiChannelType } from "../api/apiChannelType";
 import {
@@ -49,6 +49,15 @@ export const useChannelType = () => {
       dispatch(
         onGetChannelTypeError(error.response.data?.msg || "TypeAd error")
       );
+      Swal.fire({
+        title: error.response.data?.msg || "TypeAd error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
       setTimeout(() => {
         dispatch(clearErrorMessageChannelType());
       }, 20);
@@ -65,6 +74,15 @@ export const useChannelType = () => {
       dispatch(
         onGetChannelTypeError(error.response.data?.msg || "TypeAd error")
       );
+      Swal.fire({
+        title: error.response.data?.msg || "TypeAd error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
       setTimeout(() => {
         dispatch(clearErrorMessageChannelType());
       }, 20);

@@ -7,6 +7,7 @@ interface PropsNewDataForm {
   title?: string;
   storeData?: any;
   createData?: any;
+  getStoreData?: any;
 }
 
 const NewDataForm = ({
@@ -26,14 +27,12 @@ const NewDataForm = ({
           />
         </>
       );
-      break;
     case 2:
       return (
         <>
           <DataTypeForm2 title={title} />
         </>
       );
-      break;
     case 3:
       return (
         <>
@@ -44,7 +43,6 @@ const NewDataForm = ({
           />
         </>
       );
-      break;
     default:
       break;
   }

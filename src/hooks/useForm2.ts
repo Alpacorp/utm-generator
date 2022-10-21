@@ -6,6 +6,7 @@ export const useForm2 = (initialForm = {}, formValidations: any = {}) => {
 
   useEffect(() => {
     createValidators();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState]);
 
   useEffect(() => {

@@ -19,7 +19,9 @@ const DataTypeForm1 = ({ title, createData, storeData }: PropsDataForm1) => {
   const handleNewData = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     createData({ name: addName, shortname: addShortName });
-    storeData();
+    setTimeout(() => {
+      storeData();
+    }, 1000);
     onResetForm();
   };
 
@@ -53,7 +55,7 @@ const DataTypeForm1 = ({ title, createData, storeData }: PropsDataForm1) => {
           required
           type="text"
           style={{ width: "100%", marginBottom: "10px" }}
-          helperText="Digital el nombre corto"
+          helperText="Digital el nombre corto el cual debe ser único"
         />
         <Grid style={{ margin: "10px 0 30px 0" }}>
           <Button

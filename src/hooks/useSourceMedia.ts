@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { apiSourceMedia } from "../api/apiSourceMedia";
 import {
@@ -52,6 +52,56 @@ export const useSourceMedia = () => {
       dispatch(
         onGetSourceMediaError(error.response.data?.msg || "TypeAd error")
       );
+      Swal.fire({
+        title: error.response.data?.msg || "Strategy error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      setTimeout(() => {
+        dispatch(clearErrorMessageSourceMedia());
+      }, 20);
+    }
+  };
+
+  const updateSourceMedia = async (id: string, data: any) => {
+    dispatch(onCheckingSourceMedia());
+
+    try {
+      await apiSourceMedia.put(`/sourcemedia/${id}`, data);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(
+        onGetSourceMediaError(error.response.data?.msg || "TypeAd error")
+      );
+      Swal.fire({
+        title: error.response.data?.msg || "Strategy error",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      setTimeout(() => {
+        dispatch(clearErrorMessageSourceMedia());
+      }, 20);
+    }
+  };
+
+  const deleteSourceMedia = async (id: string) => {
+    dispatch(onCheckingSourceMedia());
+
+    try {
+      await apiSourceMedia.delete(`/sourcemedia/${id}`);
+    } catch (error: any) {
+      console.log("error", error);
+      dispatch(
+        onGetSourceMediaError(error.response.data?.msg || "TypeAd error")
+      );
       setTimeout(() => {
         dispatch(clearErrorMessageSourceMedia());
       }, 20);
@@ -61,5 +111,7 @@ export const useSourceMedia = () => {
   return {
     sourceMediaStore,
     createSourceMedia,
+    updateSourceMedia,
+    deleteSourceMedia,
   };
 };

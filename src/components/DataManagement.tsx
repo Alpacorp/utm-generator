@@ -1,7 +1,6 @@
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useSelector } from "react-redux";
-import Actions from "./Actions";
 import { useState, useMemo } from "react";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import Actions from "./Actions";
 import NewDataForm from "./NewDataForm";
 
 interface PropsDataManagement {
@@ -28,9 +27,9 @@ const DataManagement = ({
 
   const columns = useMemo(
     () => [
-      { field: "_id", headerName: "id", width: 150 },
+      { field: "_id", headerName: "id", width: 250 },
       { field: "date", headerName: "created date", width: 250 },
-      { field: "name", headerName: "name", width: 150, editable: true },
+      { field: "name", headerName: "name", width: 250, editable: true },
       {
         field: "shortname",
         headerName: "shortname",
@@ -47,7 +46,7 @@ const DataManagement = ({
         field: "actions",
         headerName: "actions",
         type: "actions",
-        width: 150,
+        width: 200,
         renderCell: (params: any) => {
           return (
             <Actions
@@ -64,10 +63,9 @@ const DataManagement = ({
         },
       },
     ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [rowId]
   );
-
-  const { businessLine } = useSelector((state: any) => state.businessLine);
 
   useMemo(() => {
     setData(getStoreData ? getStoreData : []);
