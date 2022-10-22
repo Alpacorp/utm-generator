@@ -84,6 +84,11 @@
       "id": 18,
       "name": "qr_rompetrafico",
       "idChannelType": 1
+    },
+    {
+      "id": 19,
+      "name": "afiche_oficinas",
+      "idChannelType": 1
     }
   ]
 }
