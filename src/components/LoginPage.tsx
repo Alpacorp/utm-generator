@@ -1,8 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  Typography,
+} from "@mui/material";
 import { useAuthStore } from "../hooks/useAuthStore";
 import { useForm2 } from "../hooks/useForm2";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const loginFormFields = {
   loginEmail: "",
@@ -11,6 +21,7 @@ const loginFormFields = {
 
 export const LoginPage = () => {
   const { startLogin, errorMessage } = useAuthStore();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     loginEmail,
@@ -29,6 +40,16 @@ export const LoginPage = () => {
     }
   }, [errorMessage]);
 
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
   return (
     <Grid
       container
@@ -46,36 +67,44 @@ export const LoginPage = () => {
           Inicia Sesión
         </Typography>
         <form onSubmit={loginSubmit}>
-          <Grid style={{ margin: "10px 0" }}>
-            <TextField
+          <Grid style={{ margin: "10px 0" }}></Grid>
+          <FormControl variant="outlined" sx={{ m: 1, width: "25ch" }}>
+            <InputLabel htmlFor="outlined-adornment-password">
+              Correo
+            </InputLabel>
+            <OutlinedInput
               type="email"
-              placeholder="Correo"
               name="loginEmail"
               value={loginEmail}
               onChange={onLoginInputChange}
-              variant="outlined"
-              helperText="Digita tu correo electrónico"
-              size="small"
               required
               label="Correo"
               autoFocus
             />
-          </Grid>
-          <Grid style={{ margin: "10px 0" }}>
-            <TextField
-              type="password"
-              placeholder="Contraseña"
-              name="loginPassword"
+          </FormControl>
+          <FormControl variant="outlined" sx={{ m: 1, width: "25ch" }}>
+            <InputLabel htmlFor="loginPassword">Contraseña</InputLabel>
+            <OutlinedInput
+              type={showPassword ? "text" : "password"}
               value={loginPassword}
+              name="loginPassword"
+              id="loginPassword"
               onChange={onLoginInputChange}
-              autoComplete="off"
-              variant="outlined"
-              helperText="Digita tu contraseña"
-              size="small"
-              required
               label="Contraseña"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
             />
-          </Grid>
+          </FormControl>
           <Grid style={{ margin: "10px 0" }}>
             <Button
               variant="contained"
