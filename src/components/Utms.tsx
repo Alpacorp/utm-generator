@@ -126,11 +126,11 @@ const Utms = () => {
       <h3>Registro de url + utms</h3>
       <Grid
         container
-        style={{ margin: "20px 0" }}
+        style={{ margin: "20px 0", justifyContent: "center" }}
         itemScope
         itemType="https://schema.org/Thing"
       >
-        <Grid item lg={12} md={12} xs={12}>
+        <Grid item lg={6} md={12} xs={12}>
           <form onSubmit={handleSubmit}>
             <TextField
               id="url"

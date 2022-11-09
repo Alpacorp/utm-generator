@@ -37,7 +37,7 @@ export const LoginPage = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        height: "100vh",
+        height: "80vh",
         alignItems: "center",
       }}
     >
