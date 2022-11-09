@@ -80,6 +80,7 @@ export const LoginPage = () => {
               required
               label="Correo"
               autoFocus
+              autoComplete="on"
             />
           </FormControl>
           <FormControl variant="outlined" sx={{ m: 1, width: "25ch" }}>
@@ -91,6 +92,7 @@ export const LoginPage = () => {
               id="loginPassword"
               onChange={onLoginInputChange}
               label="Contraseña"
+              autoComplete="off"
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
