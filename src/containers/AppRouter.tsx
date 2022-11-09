@@ -32,38 +32,54 @@ const AppRouter = () => {
         <Layout>
           <div
             className="mainLogo"
-            style={{ maxWidth: "300px", width: "100%", margin: "0 auto" }}
+            style={{
+              // maxWidth: "300px",
+              width: "100%",
+              // margin: "0 auto",
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+            }}
             itemScope
             itemType="http://schema.org/Brand"
           >
-            <img
-              alt="logo del banco caja social"
-              itemProp="logo"
-              src="https://www.bancocajasocial.com/portalserver/content/atom/ed3567c4-64a3-462a-93a4-7c6466ef50e8/content/General/Logo%20Banco%20Caja%20Social?id=ff6b0aed-6fb8-4be2-9326-cb5847feac22"
-            />
+            <div
+              style={{
+                width: "100%",
+                maxWidth: "300px",
+              }}
+            >
+              <img
+                alt="logo del banco caja social"
+                itemProp="logo"
+                src="https://www.bancocajasocial.com/portalserver/content/atom/ed3567c4-64a3-462a-93a4-7c6466ef50e8/content/General/Logo%20Banco%20Caja%20Social?id=ff6b0aed-6fb8-4be2-9326-cb5847feac22"
+              />
+            </div>
 
             {status === "authenticated" ? (
-              <Grid style={{ margin: "20px 0" }}>
-                <Typography variant="h6" color="primary" fontSize={18}>
-                  Hola <strong>{user?.name || "Usuario"}</strong>
-                </Typography>
-                <Typography
-                  variant="inherit"
-                  color="primary"
-                  fontSize={13}
-                  style={{ margin: "5px 0" }}
-                >
-                  Perfil <strong>{user.role || "Rol"}</strong>
-                </Typography>
-                <Button
-                  startIcon={<ExitToAppIcon />}
-                  size="small"
-                  onClick={startLogout}
-                  variant="outlined"
-                >
-                  Cerrar Sesión
-                </Button>
-              </Grid>
+              <div>
+                <Grid style={{ margin: "20px 0" }}>
+                  <Typography variant="h6" color="primary" fontSize={18}>
+                    Hola <strong>{user?.name || "Usuario"}</strong>
+                  </Typography>
+                  <Typography
+                    variant="inherit"
+                    color="primary"
+                    fontSize={13}
+                    style={{ margin: "5px 0" }}
+                  >
+                    Perfil <strong>{user.role || "Rol"}</strong>
+                  </Typography>
+                  <Button
+                    startIcon={<ExitToAppIcon />}
+                    size="small"
+                    onClick={startLogout}
+                    variant="outlined"
+                  >
+                    Cerrar Sesión
+                  </Button>
+                </Grid>
+              </div>
             ) : (
               ""
             )}
