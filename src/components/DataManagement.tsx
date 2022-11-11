@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Actions from "./Actions";
 import NewDataForm from "./NewDataForm";
+import { Skeleton } from "@mui/material";
 
 interface PropsDataManagement {
   type?: number;
@@ -74,29 +75,43 @@ const DataManagement = ({
   return (
     <>
       <div style={{ height: 400, width: "100%" }}>
-        <NewDataForm
-          type={type}
-          title={title}
-          storeData={storeData}
-          createData={createData}
-        />
-        <DataGrid
-          rows={data}
-          columns={columns}
-          pageSize={10}
-          getRowId={(row: any) => row._id}
-          rowsPerPageOptions={[5, 10, 20, 50]}
-          components={{
-            Toolbar: GridToolbar,
-          }}
-          getRowSpacing={(params) => ({
-            top: params.isFirstVisible ? 0 : 5,
-            bottom: params.isLastVisible ? 0 : 5,
-          })}
-          onCellEditCommit={(params: any) => {
-            setRowId(params.id);
-          }}
-        />
+        {data.length > 0 ? (
+          <NewDataForm
+            type={type}
+            title={title}
+            storeData={storeData}
+            createData={createData}
+          />
+        ) : (
+          <Skeleton variant="rectangular" width={"100%"} height={118} />
+        )}
+
+        {data.length > 0 ? (
+          <DataGrid
+            rows={data}
+            columns={columns}
+            pageSize={10}
+            getRowId={(row: any) => row._id}
+            rowsPerPageOptions={[5, 10, 20, 50]}
+            components={{
+              Toolbar: GridToolbar,
+            }}
+            getRowSpacing={(params) => ({
+              top: params.isFirstVisible ? 0 : 5,
+              bottom: params.isLastVisible ? 0 : 5,
+            })}
+            onCellEditCommit={(params: any) => {
+              setRowId(params.id);
+            }}
+          />
+        ) : (
+          <Skeleton
+            variant="rectangular"
+            width={"100%"}
+            height={400}
+            animation="wave"
+          />
+        )}
       </div>
     </>
   );
