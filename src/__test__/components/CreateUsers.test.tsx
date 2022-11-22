@@ -1,8 +1,4 @@
-// create a test file in the CreateUsers test folder
-
-// Path: src/__test__/CreateUsers.test.ts
-
-import { apiBusiness } from "../api/apiBusiness";
+import { apiBusiness } from "../../api/apiBusiness";
 
 describe("CreateUsers", () => {
   it("should return a user", async () => {

@@ -1,7 +1,7 @@
 // create a test suite for the login page
 
 import { render, screen } from "@testing-library/react";
-import { LoginPage } from "../components/LoginPage";
+import { LoginPage } from "../../components/LoginPage";
 
 describe("Login Page", () => {
   // create a test case for the login page
