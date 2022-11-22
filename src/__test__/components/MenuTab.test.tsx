@@ -1,8 +1,8 @@
 // create a test suite for the menu tab
 
 import { render, screen } from "@testing-library/react";
-import { MenuTab } from "../components/MenuTab";
 import { BrowserRouter } from "react-router-dom";
+import { MenuTab } from "../../components/MenuTab";
 
 describe("Menu Tab", () => {
   // create a test case for the menu tab

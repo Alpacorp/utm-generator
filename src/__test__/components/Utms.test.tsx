@@ -1,7 +1,7 @@
 // create a test suite for the utms page
 
 import { render, screen } from "@testing-library/react";
-import Utms from "../components/Utms";
+import Utms from "../../components/Utms";
 import { BrowserRouter } from "react-router-dom";
 
 describe("Utms Page", () => {
