@@ -75,18 +75,16 @@ const DataManagement = ({
   return (
     <>
       <div style={{ height: 400, width: "100%" }}>
-        {data.length > 0 ? (
+        {data.length > 0 && (
           <NewDataForm
             type={type}
             title={title}
             storeData={storeData}
             createData={createData}
           />
-        ) : (
-          <Skeleton variant="rectangular" width={"100%"} height={118} />
         )}
 
-        {data.length > 0 ? (
+        {data.length > 0 && (
           <DataGrid
             rows={data}
             columns={columns}
@@ -103,13 +101,6 @@ const DataManagement = ({
             onCellEditCommit={(params: any) => {
               setRowId(params.id);
             }}
-          />
-        ) : (
-          <Skeleton
-            variant="rectangular"
-            width={"100%"}
-            height={400}
-            animation="wave"
           />
         )}
       </div>

@@ -21,7 +21,6 @@ const Utms = () => {
   const [formValues, handleInputChange, reset] = useForm({
     url: "",
     businessLine: "",
-    typeAd: "",
     strategy: "",
     channelType: "",
     sourceMedia: "",
@@ -34,7 +33,6 @@ const Utms = () => {
     url,
     businessLine,
     channelType,
-    typeAd,
     sourceMedia,
     strategy,
     medium,
@@ -42,7 +40,7 @@ const Utms = () => {
   } = formValues;
 
   const createCampainName = () => {
-    const name = `${businessLine}_${typeAd}_${strategy}`;
+    const name = `${businessLine}_${strategy}`;
     setCampainName(name);
   };
 
@@ -94,7 +92,7 @@ const Utms = () => {
   useEffect(() => {
     createCampainName();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [businessLine, typeAd, strategy]);
+  }, [businessLine, strategy]);
 
   const createUrl = () => {
     createCampainName();
@@ -162,26 +160,6 @@ const Utms = () => {
             >
               <MenuItem value="">Selecciona</MenuItem>
               {businessLineData?.businessLines?.map((value: any) => (
-                <MenuItem key={value._id} value={value.shortname}>
-                  {value.name + " - " + value.shortname}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              style={{ width: "100%", marginBottom: "10px" }}
-              id="typeAd"
-              name="typeAd"
-              label="Tipo de inversión"
-              variant="outlined"
-              select
-              size="small"
-              value={typeAd ? typeAd : ""}
-              onChange={handleInputChange}
-              helperText="Selecciona el tipo de inversión"
-              required
-            >
-              <MenuItem value="">Selecciona</MenuItem>
-              {typeAdData?.typeAd?.map((value: any) => (
                 <MenuItem key={value._id} value={value.shortname}>
                   {value.name + " - " + value.shortname}
                 </MenuItem>
@@ -310,7 +288,6 @@ const Utms = () => {
               disabled={
                 !url ||
                 !businessLine ||
-                !typeAd ||
                 !strategy ||
                 !channelType ||
                 !sourceMedia ||
