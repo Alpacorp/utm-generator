@@ -75,16 +75,16 @@ const DataManagement = ({
   return (
     <>
       <div style={{ height: 400, width: "100%" }}>
-        {data.length > 0 && (
+        {
           <NewDataForm
             type={type}
             title={title}
             storeData={storeData}
             createData={createData}
           />
-        )}
+        }
 
-        {data.length > 0 && (
+        {
           <DataGrid
             rows={data}
             columns={columns}
@@ -102,7 +102,7 @@ const DataManagement = ({
               setRowId(params.id);
             }}
           />
-        )}
+        }
       </div>
     </>
   );
